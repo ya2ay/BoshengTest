@@ -245,18 +245,14 @@ void BoShengTest::onShutdown()
 }
 
 std::pair<std::string, std::string> BoShengTest::parseInitString(const std::string& input) {
-    // 1. 找到全角冒号 '：' 的位置
     size_t colonPos = input.find(":");
-    if (colonPos == std::string::npos) return { "", "" }; // 没找到冒号，返回空
+    if (colonPos == std::string::npos) return { "", "" }; 
 
-    // 2. 从冒号之后开始，找到等号 '=' 的位置
+
     size_t equalPos = input.find('=', colonPos + 1);
-    if (equalPos == std::string::npos) return { "", "" }; // 没找到等号，返回空
-
-    // 3. 截取 b (冒号和等号之间的部分)
+    if (equalPos == std::string::npos) return { "", "" }; 
     std::string b = input.substr(colonPos + 1, equalPos - colonPos - 1);
 
-    // 4. 截取 c (等号之后的所有部分)
     std::string c = input.substr(equalPos + 1);
     std::string d = "";
 

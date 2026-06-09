@@ -5,6 +5,7 @@
 #include <string>
 #include <fcntl.h>
 
+
 using namespace qpid::messaging;
 using namespace qpid::types;
 using namespace Proxinse;
@@ -441,55 +442,6 @@ bool ProxinseInterface::sendImageData(std::string filename, const char *data, in
     return true;
 }
 
-//void ProxinseInterface::queryAllParamters()
-//{
-//    sendMessage(CCU::query_parameter);
-//    //sendMessage2(CCU::query_parameter);
-//}
-
-//void ProxinseInterface::parseCameraParameters(const Variant::List& matsList)
-//{
-//    std::string info = "error happens when parseCameraParameters";
-//    listLogs.push_back(info);
-//    //CameraParameters cp;
-//    ////qDebug() << matsList.size();
-//
-//    //auto it = matsList.begin();
-//
-//    //cp.M1 = deserializeMat(it->asMap()); ++it;
-//    //cp.D1 = deserializeMat(it->asMap()); ++it;
-//    //cp.M2 = deserializeMat(it->asMap()); ++it;
-//    //cp.D2 = deserializeMat(it->asMap()); ++it;
-//    //cp.R = deserializeMat(it->asMap()); ++it;
-//    //cp.T = deserializeMat(it->asMap()); ++it;
-//
-//    //cp.R1 = deserializeMat(it->asMap()); ++it;
-//    //cp.R2 = deserializeMat(it->asMap()); ++it;
-//    //cp.P1 = deserializeMat(it->asMap()); ++it;
-//    //cp.P2 = deserializeMat(it->asMap()); ++it;
-//
-//    //cp.PreZoom = it->asDouble();
-//
-//    //
-//    // TODO: ADD YOUR HANDLER TO CameraParameters
-//    //
-//    //printMat("M1", cp.M1);
-//    //printMat("D1", cp.D1);
-//    //printMat("M2", cp.M2);
-//    //printMat("D2", cp.D2);
-//    //printMat("R", cp.R);
-//    //printMat("T", cp.T);
-//    //printMat("R1", cp.R1);
-//    //printMat("R2", cp.R2);
-//    //printMat("P1", cp.P1);
-//    //printMat("P2", cp.P2);
-//    //qDebug() << "PreZoom = " << cp.PreZoom;
-//}
-//
-//void ProxinseInterface::queryCameraParameters()
-//{
-//    sendMessage2(CCU::camera_parameters);
-//}
 
 std::list<std::string> ProxinseInterface::LogInfo()
 {

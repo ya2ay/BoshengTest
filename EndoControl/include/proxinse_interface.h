@@ -9,7 +9,6 @@
 #include <qpid/messaging/Receiver.h>
 
 using namespace qpid::types;
-
 struct Point {
 	int _x = 0;
 	int _y = 0;

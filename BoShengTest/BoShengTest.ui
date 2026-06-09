@@ -61,7 +61,7 @@
          <item>
           <widget class="QLabel" name="label_2">
            <property name="text">
-            <string>IPï¼š</string>
+            <string>IP£º</string>
            </property>
           </widget>
          </item>
