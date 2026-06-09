@@ -1,0 +1,9 @@
+# 依赖目录
+.vs/
+x64/
+BoShengTest/
+
+# 编译产物
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user

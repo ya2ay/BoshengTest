@@ -1,0 +1,8 @@
+# 依赖目录
+thirdpart/
+x64/
+
+# 编译产物
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37027.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BoShengTest", "BoShengTest.vcxproj", "{9846C88A-4110-4C67-A327-8B3F38B66CE6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EndoControl", "..\EndoControl\EndoControl.vcxproj", "{DE17C960-D0D1-4930-AF8D-1DA7FF86EE68}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9846C88A-4110-4C67-A327-8B3F38B66CE6}.Debug|x64.ActiveCfg = Debug|x64
+		{9846C88A-4110-4C67-A327-8B3F38B66CE6}.Debug|x64.Build.0 = Debug|x64
+		{9846C88A-4110-4C67-A327-8B3F38B66CE6}.Release|x64.ActiveCfg = Release|x64
+		{9846C88A-4110-4C67-A327-8B3F38B66CE6}.Release|x64.Build.0 = Release|x64
+		{DE17C960-D0D1-4930-AF8D-1DA7FF86EE68}.Debug|x64.ActiveCfg = Debug|x64
+		{DE17C960-D0D1-4930-AF8D-1DA7FF86EE68}.Debug|x64.Build.0 = Debug|x64
+		{DE17C960-D0D1-4930-AF8D-1DA7FF86EE68}.Release|x64.ActiveCfg = Release|x64
+		{DE17C960-D0D1-4930-AF8D-1DA7FF86EE68}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4F877DF3-D625-4234-B528-4F67CEA43D75}
+	EndGlobalSection
+EndGlobal
