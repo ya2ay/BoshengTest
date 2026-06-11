@@ -13,7 +13,6 @@ public:
     BoShengTest(QWidget *parent = nullptr);
     ~BoShengTest();
 
-    void Initialize();
 private:
     Ui::BoShengTestClass ui;
 
@@ -33,15 +32,15 @@ private slots:
     void onShutdown();
     void onInitialize();
     void onConnect();
+
+    void onUpdateEndo();
+    void onUpdateInst();
+    void onUpdateMsg();
+    void onUpdatePopMsg();
+
 private:
     endoControl scope;
     bool bConnected = false;
-    bool bIs2D = false;
     bool bFireflyOn = false;
-    bool bLightOn = false;
-    bool bIsSmoking = false;
-    bool bVideoStart = false;
-
-    std::pair<std::string, std::string> parseInitString(const std::string& input);
 };
 

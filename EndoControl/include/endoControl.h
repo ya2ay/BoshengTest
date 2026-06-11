@@ -3,11 +3,13 @@
 
 #include "proxinse_interface.h"
 #include "protocol.h"
+#include "dataStruct.h"
 #include <thread>
 #include <chrono>
 #include <iostream>
 #include <thread>
 #include <windows.h>
+#include <map>
 
 class DLL_EXPORTS endoControl
 {
@@ -16,7 +18,6 @@ public:
     ~endoControl();
 
     bool Connect(std::string ipAddress = "192.168.1.222");
-    bool Initialize();
 
     void on3DCalib();
     void onFirefly();
@@ -37,12 +38,21 @@ public:
     void quitQpid();
     void onShutdown();
 
-    std::list<std::string> GetInfo();
+    std::map<std::string, std::string> GetInfo();
 
     //调整亮度
     //调整对比度 
     //荧光模式
-    //控制消息提示可见性
+
+    //状态查询功能
+    //连接超时处理
+
+    //OSD
+    void LoadOSDImages();
+    void UpdateInstStatus(InstData);
+    void UpdateEndoStatus(EndoData);
+    void UpdateMsg(CustomErrorInfo);
+    void UpdatePopMsg(PopupInfo);
 
 private:
     STARTUPINFO si = { sizeof(si) };         // 控制窗口等启动信息
@@ -50,6 +60,11 @@ private:
     ProxinseInterface BSInterface;
     bool bConnected = false;
 
+    std::string SlaveTypeToNumStatus(SlaveNum c);
+    std::string SlaveStatusToNumStatus(InstStatus_Master m, InstStatus_Control c);
+    std::string SlaveStatusToBackground(InstStatus_Control c);
+    std::pair<std::string, std::string> parseInitString(const std::string& input);
+    std::string EnergyStatusToString(InstStatus_EnergyStatus s);
 
 };
 

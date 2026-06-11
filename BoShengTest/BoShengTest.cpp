@@ -18,15 +18,17 @@ BoShengTest::BoShengTest(QWidget *parent)
     connect(ui.btnLog, SIGNAL(clicked()), this, SLOT(onLog()));
     connect(ui.btnShutdown, SIGNAL(clicked()), this, SLOT(onShutdown()));
 
-    //connect(ui.sldFirefly, SIGNAL(valueChanged(int)), this, SLOT(onFireflySenstive(int)));
-    //connect(ui.sldLight, SIGNAL(valueChanged(int)), this, SLOT(onLightLevel(int)));
-    //connect(ui.sldZoom, SIGNAL(valueChanged(int)), this, SLOT(onZoomRate(int)));
-
     connect(ui.sldFirefly, &QSlider::sliderReleased, this, &BoShengTest::onFireflySenstive);
     connect(ui.sldLight, &QSlider::sliderReleased, this, &BoShengTest::onLightLevel);
     connect(ui.sldZoom, &QSlider::sliderReleased, this, &BoShengTest::onZoomRate);
 
     connect(ui.rdbScope, &QRadioButton::toggled, this, &BoShengTest::onScopeRotate);
+
+    //OSD
+    connect(ui.btnUpdate_Arm1, SIGNAL(clicked()), this, SLOT(onUpdateInst()));
+    connect(ui.btnUpdate_Endo, SIGNAL(clicked()), this, SLOT(onUpdateEndo()));
+    connect(ui.btnSendMsg, SIGNAL(clicked()), this, SLOT(onUpdateMsg()));
+    connect(ui.btnSendPopMsg, SIGNAL(clicked()), this, SLOT(onUpdatePopMsg()));
 
     ui.sldFirefly->setDisabled(true);
     ui.sldLight->setDisabled(true);
@@ -57,15 +59,7 @@ void BoShengTest::onInitialize()
 {
     if (bConnected)
     {
-        std::list<std::string> scopeInfo = scope.GetInfo();
-        std::map<std::string, std::string> paraMap;
-
-        for (const auto& info : scopeInfo) {
-            std::pair<std::string, std::string> sspair = parseInitString(info);
-            if (!sspair.first.empty() && !sspair.second.empty()) {
-                paraMap.insert({ sspair.first, sspair.second });
-            }
-        }
+        std::map<std::string, std::string> paraMap = scope.GetInfo();
 
         if (8 < paraMap.size())
         {
@@ -231,10 +225,13 @@ void BoShengTest::onScopeRotate(bool checked)
 
 void BoShengTest::onLog()
 {
-    std::list<std::string> scopeInfo = scope.GetInfo();
-    auto it = scopeInfo.begin();
-    for (int i = 0; i < scopeInfo.size(); ++i) {
-        ui.txtScopeInfo->append(QString::fromStdString(*it++));
+    std::map<std::string, std::string> paraMap = scope.GetInfo();
+    auto it = paraMap.begin();
+    for (int i = 0; i < paraMap.size(); ++i) {
+        std::string strFirst = (*it++).first;
+        std::string strSecond = (*it++).second;
+        ui.txtScopeInfo->append(QString::fromStdString(strFirst + strSecond));
+        it++;
     }
 }
 
@@ -244,25 +241,249 @@ void BoShengTest::onShutdown()
     scope.onShutdown();
 }
 
-std::pair<std::string, std::string> BoShengTest::parseInitString(const std::string& input) {
-    size_t colonPos = input.find(":");
-    if (colonPos == std::string::npos) return { "", "" }; 
-
-
-    size_t equalPos = input.find('=', colonPos + 1);
-    if (equalPos == std::string::npos) return { "", "" }; 
-    std::string b = input.substr(colonPos + 1, equalPos - colonPos - 1);
-
-    std::string c = input.substr(equalPos + 1);
-    std::string d = "";
-
-    if (0 == c.compare("false"))
-        d = "0";
-    else if (0 == c.compare("true"))
-        d = "1";
-    else
-        d = c;
-
-    return { b, d };
-}
 //OSD
+void BoShengTest::onUpdateInst()
+{
+    int armIndex = ui.cbbArm1SlaveIndex->currentText().toInt();
+
+    InstData armData;
+    switch (armIndex)
+    {
+         case 1: {
+             armData.slaveType = SlaveNum::ARM1;
+             break;
+         }
+         case 2: {
+             armData.slaveType = SlaveNum::ARM2;
+             break;
+         }
+         case 3: {
+             armData.slaveType = SlaveNum::ARM3;
+             break;
+         }
+         case 4: {
+             armData.slaveType = SlaveNum::ARM4;
+             break;
+         }
+         default:
+             armData.slaveType = SlaveNum::UNKNOW_SLAVE;
+    }
+
+    QString arm1name = ui.edtArm1Name->text();
+    armData.name = arm1name.toStdString();
+
+    int RMTimes = ui.spbArm1Times->value();
+    armData.remainTimes = RMTimes;
+
+    if (ui.rdbArm1Empty->isChecked())
+        armData.masterType = InstStatus_Master::EMPTY;
+    else if(ui.rdbArm1Left->isChecked())
+        armData.masterType = InstStatus_Master::LEFTHAND;
+    else if (ui.rdbArm1Right->isChecked())
+        armData.masterType = InstStatus_Master::RIGHTHAND;
+
+    else
+        armData.masterType = InstStatus_Master::UNKNOW_MASTER;
+
+    if (ui.rdbArm1Uncontrol->isChecked())
+        armData.controlType = InstStatus_Control::UNCONTROLLED;
+    else if (ui.rdbArm1Control->isChecked())
+        armData.controlType = InstStatus_Control::CONTROLLED;
+    else if (ui.rdbArm1Pause->isChecked())
+        armData.controlType = InstStatus_Control::PAUSE;
+    else if (ui.rdbArm1Switch->isChecked())
+        armData.controlType = InstStatus_Control::SWITCHABLE;
+    else if (ui.rdbArm1Break->isChecked())
+        armData.controlType = InstStatus_Control::BREAKDOWN;
+    else
+        armData.controlType = InstStatus_Control::UNKNOWED_CONTROL;
+
+    if (ui.rdbArm1EnergyNone->isChecked()) {
+        armData.energyType = InstStatus_Energy::NONE_ENERGY;
+    }
+    else if (ui.rdbArm1Cutable->isChecked()) {
+        armData.energyType = InstStatus_Energy::CUTABLE;
+    }
+    else if (ui.rdbArm1Coagable->isChecked()) {
+        armData.energyType = InstStatus_Energy::COAGABLE;
+    }
+    else if (ui.rdbArm1Biop->isChecked()) {
+        armData.energyType = InstStatus_Energy::BIOPOLAR;
+    }
+    else if (ui.rdbArm1CCable->isChecked()) {
+        armData.energyType = InstStatus_Energy::CUTCOAG;
+    }
+    else {
+        armData.energyType = InstStatus_Energy::UNKNOWED_ENERGY;
+    }
+
+    if (ui.rdbArm1Disconn->isChecked()) {
+        armData.energyStatus = InstStatus_EnergyStatus::DISCONNECTED;
+    }
+    else if (ui.rdbArm1Conn->isChecked()) {
+        armData.energyStatus = InstStatus_EnergyStatus::CONNECTED;
+    }
+    else if (ui.rdbArm1Hover->isChecked()) {
+        armData.energyStatus = InstStatus_EnergyStatus::HOVERING;
+    }
+    else if (ui.rdbArm1Cutting->isChecked()) {
+        armData.energyStatus = InstStatus_EnergyStatus::CUTTING;
+    }
+    else if (ui.rdbArm1Coaging->isChecked()) {
+        armData.energyStatus = InstStatus_EnergyStatus::COAGING;
+    }
+    else if (ui.rdbArm1Bioping->isChecked()) {
+        armData.energyStatus = InstStatus_EnergyStatus::BIOPOLARING;
+    }
+    else {
+        armData.energyStatus = InstStatus_EnergyStatus::UNKNOW_ESTATUS;
+    }
+
+    InstPosition pos{ ui.lndtInst1_X->text().toInt(), ui.lndtInst1_Y->text().toInt(), ui.lndtInst1_Z->text().toInt() };
+    armData.position = pos;
+
+    scope.UpdateInstStatus(armData);
+}
+
+void BoShengTest::onUpdateEndo()
+{
+    EndoData endoData;
+
+    QString endoName = ui.edtEndoName->text();
+    endoData.name = endoName.toStdString();
+
+    int endoIndex = ui.cbbEndoSlaveIndex->currentText().toInt();
+    endoData.slaveIndex = endoIndex;
+    
+    int endoDegree = ui.cbbEndoType->currentText().toInt();
+
+    if (ui.rbdScopeUp->isChecked())
+        endoData.isSocpeUp = true;
+    else
+        endoData.isSocpeUp = false;
+
+    if (30 == endoDegree)
+        endoData.is30Degree = true;
+    else
+        endoData.is30Degree = false;
+
+    EndoAttitude att{ ui.lndtEndo_Y->text().toDouble(), ui.lndtEndo_R->text().toDouble(), ui.lndtEndo_P->text().toDouble() };
+    endoData.att = att;
+
+    scope.UpdateEndoStatus(endoData);
+}
+
+void BoShengTest::onUpdateMsg()
+{
+    CustomErrorInfo info;
+    QString msg = ui.edtErrorContent->text();
+    info.eContent = msg.toStdString();
+
+    int level = ui.cbbErrorLevel->currentIndex();
+
+    switch (level)
+    {
+    case 0: {
+        info.eContent = ErrorLevel::INFO;
+        break;
+    }
+    case 1: {
+        info.eContent = ErrorLevel::PROMPT;
+        break;
+    }
+    case 2: {
+        info.eContent = ErrorLevel::WARNING;
+        break;
+    }
+    case 3: {
+        info.eContent = ErrorLevel::FAULT;
+        break;
+    }
+    default:
+        info.eContent = ErrorLevel::UNKNOW_LEVEL;
+    }
+
+    info.isHide = ui.btnShowHideMsg->isChecked();
+
+    scope.UpdateMsg(info);
+}
+
+void BoShengTest::onUpdatePopMsg()
+{
+    PopupInfo info;
+
+    int armIndex = ui.cbbPopArm->currentText().toInt();
+    switch (armIndex)
+    {
+    case 1: {
+        info.popSlave = SlaveNum::ARM1;
+        break;
+    }
+    case 2: {
+        info.popSlave = SlaveNum::ARM2;
+        break;
+    }
+    case 3: {
+        info.popSlave = SlaveNum::ARM3;
+        break;
+    }
+    case 4: {
+        info.popSlave = SlaveNum::ARM4;
+        break;
+    }
+    default:
+        info.popSlave = SlaveNum::UNKNOW_SLAVE;
+    }
+
+    int level = ui.cbbPopErrorLevel->currentIndex();
+    switch (level)
+    {
+    case 0: {
+        info.popLevel = ErrorLevel::INFO;
+        break;
+    }
+    case 1: {
+        info.popLevel = ErrorLevel::PROMPT;
+        break;
+    }
+    case 2: {
+        info.popLevel = ErrorLevel::WARNING;
+        break;
+    }
+    case 3: {
+        info.popLevel = ErrorLevel::FAULT;
+        break;
+    }
+    default:
+        info.popLevel = ErrorLevel::UNKNOW_LEVEL;
+    }
+
+    int owner = ui.cbbPopErrorOwner->currentIndex();
+    switch (owner)
+    {
+    case 0: {
+        info.popOwner = PopupOwner::INST;
+        break;
+    }
+    case 1: {
+        info.popOwner = PopupOwner::SLAVE;
+        break;
+    }
+    case 2: {
+        info.popOwner = PopupOwner::MASTER;
+        break;
+    }
+    case 3: {
+        info.popOwner = PopupOwner::CANNULA;
+        break;
+    }
+    default:
+        info.popOwner = PopupOwner::UNKNOW_OWNER;
+    }
+
+    QString msg = ui.edtPopErrorMsg->text();
+    info.popContent = msg.toStdString();
+
+    scope.UpdatePopMsg(info);
+}
+

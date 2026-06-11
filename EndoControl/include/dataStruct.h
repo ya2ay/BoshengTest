@@ -3,39 +3,45 @@
 
 #include <string>
 
-enum InstStatus_Slave {
-	UNKNOW,
-	Arm1,
-	Arm2,
-	Arm3,
-	Arm4
+enum SlaveNum {
+	UNKNOW_SLAVE,
+	ARM1,
+	ARM2,
+	ARM3,
+	ARM4
 };
 
 enum InstStatus_Master {
-	UNKNOW,
-	LeftHand,
-	RightHand,
-	Switchable
+	UNKNOW_MASTER,
+	EMPTY,
+	LEFTHAND,
+	RIGHTHAND
 };
 
 enum InstStatus_Control {
-	UNKNOW,
+	UNKNOWED_CONTROL,
+	NONE_CONTROL,
 	UNCONTROLLED,
 	PAUSE,
 	CONTROLLED,
-	BREAKDOWN
+	BREAKDOWN,
+	SWITCHABLE
 };
 
 enum InstStatus_Energy {
-	UNKNOW,
+	UNKNOWED_ENERGY,
+	NONE_ENERGY,
 	CUTABLE,
 	COAGABLE,
-	BIOPOLAR
+	BIOPOLAR,
+	CUTCOAG
 };
 
 enum InstStatus_EnergyStatus {
-	UNKNOW,
+	UNKNOW_ESTATUS,
+	DISCONNECTED,
 	CONNECTED,
+	HOVERING,
 	CUTTING,
 	COAGING,
 	BIOPOLARING
@@ -47,93 +53,85 @@ struct InstPosition {
 	int z;
 };
 
-enum ErrorLevel {
-	UNKNOW,
-	INFO,
-	PROMPT,
-	WARNING,
-	FAULT
-};
-
-enum ErrorOwner{
-	UNKNOW,
-	INST,
-	MASTER,
-	SLAVE,
-	CANNULA
-};
-
-struct InstAttitude {
-	int yaw;
-	int roll;
-	int pitch;
-};
-
-//enum SlaveStatus_Sterile {
-//	UNKNOW,
-//	STERILE,
-//	UNSTERILE
-//};
-//
-//enum SlaveStatus_Stow {
-//	UNKNOW,
-//	STOW,
-//	UNSTOW
-//};
-
-//enum SlaveStatus_GuideTip {
-//	UNKNOW,
-//	CLUTCH,
-//	GUIDE,
-//	INCANNULA
-//};
-//
-//enum MasterStatus_GuideTip {
-//	UNKNOW,
-//	SQUEEZE,
-//	ROTATE,
-//	RELAX
-//};
-
 struct InstData
 {
 	std::string name;
 	short remainTimes;
 	InstStatus_Energy energyType;
 
-	InstStatus_Slave slaveType;
+	SlaveNum slaveType;
 	InstStatus_Master masterType;
 	InstStatus_Control controlType;
 
 	InstStatus_EnergyStatus energyStatus;
 	InstPosition position;
+};
 
-	PopupInfo popInfo;
+struct EndoAttitude {
+	double yaw;
+	double roll;
+	double pitch;
 };
 
 struct EndoData
 {
+	std::string name;
+	int slaveIndex;
+	//EndoStatus_Control status;
 	bool is30Degree;
 	bool isSocpeUp;
-	InstAttitude att;
+	EndoAttitude att;
 };
 
-struct PopupInfo
-{
-	ErrorLevel eLevel;
-	ErrorOwner eOwner;
-	std::string eContent;
+enum ErrorLevel {
+	UNKNOW_LEVEL,
+	INFO,
+	PROMPT,
+	WARNING,
+	FAULT
 };
 
 struct CustomErrorInfo
 {
+	bool isHide;
 	ErrorLevel eLevel;
 	std::string eContent;
 };
+
+enum PopupOwner{
+	UNKNOW_OWNER,
+	INST,
+	SLAVE,
+	MASTER,
+	CANNULA
+};
+
+struct PopupInfo
+{
+	SlaveNum popSlave;
+	ErrorLevel popLevel;
+	PopupOwner popOwner;
+	std::string popContent;
+};
+
+//enum SlaveStatus_GuideTip {
+//	UNKNOWED,
+//	CLUTCH,
+//	GUIDE,
+//	INCANNULA
+//};
+//
+//enum MasterStatus_GuideTip {
+//	UNKNOWED,
+//	SQUEEZE,
+//	ROTATE,
+//	RELAX
+//};
 
 struct SlaveArmStatus
 {
 	bool isSterile;
 	bool isStow;
 };
+
 #endif
