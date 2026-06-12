@@ -95,12 +95,26 @@ void endoControl::on3DCalib()
 
 void endoControl::onFirefly()
 {
-    BSInterface.pressCameraHeadButton(1, false); 
+    BSInterface.changeParameter(Parameters::fluo_mode, "1");
+    //BSInterface.pressCameraHeadButton(1, false); 
 }
 
-void endoControl::onFireflyMode()
+void endoControl::onFireflyMode(int mode)
 {
-    BSInterface.pressCameraHeadButton(2, false);
+    switch (mode)
+    {
+    case 1:
+        BSInterface.changeParameter(Parameters::fluo_display_mode, "1");
+        break;
+    case 2:
+        BSInterface.changeParameter(Parameters::fluo_display_mode, "2");
+        break;
+    case 3:
+        BSInterface.changeParameter(Parameters::fluo_display_mode, "3");
+        break;
+    }
+
+    //BSInterface.pressCameraHeadButton(2, false);
 }
 
 //开放API
@@ -181,6 +195,20 @@ void endoControl::onZoomRate(float Zoom)
     }
 
     BSInterface.changeParameter(Parameters::zoom, str);
+}
+
+void endoControl::setBrightness(float brightness)//0~40
+{
+    int realValue = brightness * 40 + 0.5;
+    std::string str = std::to_string(realValue);
+    BSInterface.changeParameter(Parameters::brightness, str);
+}
+
+void endoControl::setContrast(float contrast)//0~20
+{
+    int realValue = contrast * 20 + 0.5;
+    std::string str = std::to_string(realValue);
+    BSInterface.changeParameter(Parameters::contrast, str);
 }
 
 std::map<std::string, std::string> endoControl::GetInfo()

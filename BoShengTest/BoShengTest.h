@@ -20,6 +20,7 @@ private slots:
     void on3Dto2D();
     void on3DCalib();
     void onFirefly();
+    void onFireflyMode(bool checked);
     void onLight();
     void onSmoking();
     void onSnap();
@@ -32,6 +33,8 @@ private slots:
     void onShutdown();
     void onInitialize();
     void onConnect();
+    void onBrightness();
+    void onContrast();
 
     void onUpdateEndo();
     void onUpdateInst();

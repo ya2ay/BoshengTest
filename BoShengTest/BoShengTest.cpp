@@ -21,8 +21,13 @@ BoShengTest::BoShengTest(QWidget *parent)
     connect(ui.sldFirefly, &QSlider::sliderReleased, this, &BoShengTest::onFireflySenstive);
     connect(ui.sldLight, &QSlider::sliderReleased, this, &BoShengTest::onLightLevel);
     connect(ui.sldZoom, &QSlider::sliderReleased, this, &BoShengTest::onZoomRate);
+    connect(ui.sldBrightness, &QSlider::sliderReleased, this, &BoShengTest::onBrightness);
+    connect(ui.sldContrast, &QSlider::sliderReleased, this, &BoShengTest::onContrast);
 
     connect(ui.rdbScope, &QRadioButton::toggled, this, &BoShengTest::onScopeRotate);
+    connect(ui.rdbFirefly_wb, &QRadioButton::toggled, this, &BoShengTest::onFireflyMode);
+    connect(ui.rdbFirefly_standard, &QRadioButton::toggled, this, &BoShengTest::onFireflyMode);
+    connect(ui.rdbFirefly_color, &QRadioButton::toggled, this, &BoShengTest::onFireflyMode);
 
     //OSD
     connect(ui.btnUpdate_Arm1, SIGNAL(clicked()), this, SLOT(onUpdateInst()));
@@ -165,6 +170,16 @@ void BoShengTest::onFirefly()
         ui.sldFirefly->setDisabled(true);
 }
 
+void BoShengTest::onFireflyMode(bool checked)
+{
+    if (ui.rdbFirefly_wb->isChecked())
+        scope.onFireflyMode(1);
+    else if (ui.rdbFirefly_standard->isChecked())
+        scope.onFireflyMode(2);
+    else if (ui.rdbFirefly_color->isChecked())
+        scope.onFireflyMode(3);
+}
+
 void BoShengTest::onLight()
 {
     if (ui.btnLight->isChecked())
@@ -216,6 +231,18 @@ void BoShengTest::onZoomRate()
 {
     float zoom = ui.sldZoom->value();
     scope.onZoomRate((zoom + 1) / 100);
+}
+
+void BoShengTest::onBrightness()
+{
+    float brightness = ui.sldBrightness->value();
+    scope.setBrightness((brightness + 1) / 100);
+}
+
+void BoShengTest::onContrast()
+{
+    float contrast = ui.sldContrast->value();
+    scope.setContrast((contrast + 1) / 100);
 }
 
 void BoShengTest::onScopeRotate(bool checked) 

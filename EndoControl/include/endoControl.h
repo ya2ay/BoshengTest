@@ -21,7 +21,7 @@ public:
 
     void on3DCalib();
     void onFirefly();
-    void onFireflyMode();
+    void onFireflyMode(int mode);
 
     void on3Dto2D(bool type);
     void onLight(bool type);
@@ -34,15 +34,13 @@ public:
     void onFireflySenstive(float);
     void onLightLevel(float);
     void onZoomRate(float);
+    void setContrast(float contrast);
+    void setBrightness(float brightness);
 
     void quitQpid();
     void onShutdown();
 
     std::map<std::string, std::string> GetInfo();
-
-    //调整亮度
-    //调整对比度 
-    //荧光模式
 
     //状态查询功能
     //连接超时处理
@@ -66,6 +64,5 @@ private:
     std::string SlaveStatusToBackground(InstStatus_Control c);
     std::pair<std::string, std::string> parseInitString(const std::string& input);
     std::string EnergyStatusToString(InstStatus_EnergyStatus s);
-
 };
 
