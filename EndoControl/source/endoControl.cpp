@@ -16,7 +16,7 @@ endoControl::~endoControl()
 
 bool endoControl::Connect(std::string ipAddress)
 {
-    TCHAR cmdLine[] = L"D:\\EndoControl\\thirdpart\\qpid-cpp\\bin\\release\\qpidd.exe";
+    TCHAR cmdLine[] = L"D:\\EndoScope\\EndoControl\\thirdpart\\qpid-cpp\\bin\\release\\qpidd.exe";
 
     // 2. 调用API创建进程
     BOOL bSuccess = CreateProcess(
@@ -514,6 +514,14 @@ void endoControl::UpdateInstStatus(InstData data)
     else if(InstStatus_Energy::BIOPOLAR == data.energyType)
         coagName = "Energy_Biopolar";
 
+    BSInterface.clearImage(4);
+    BSInterface.clearImage(5);
+    BSInterface.clearImage(14 + (rate - 1) * 4);
+    BSInterface.clearImage(15 + (rate - 1) * 4);
+    BSInterface.clearImage(16 + (rate - 1) * 4);
+    BSInterface.clearImage(17 + (rate - 1) * 4);
+    BSInterface.clearText(6 + (rate - 1) * 2);
+
     BSInterface.drawImage(15 + (rate - 1) * 4, backgroundName,
         Rect((rate - 1) * (tabWidth + tabSpacing) + marginH, 
             marginV, 
@@ -545,7 +553,7 @@ void endoControl::UpdateInstStatus(InstData data)
     else if (InstStatus_Master::RIGHTHAND == data.masterType)
         BSInterface.drawImage(5, energyStatusName, Rect(1898, 325, 20, 540));
 
-    BSInterface.drawText(6 + (rate - 1) * 4, data.name, 
+    BSInterface.drawText(6 + (rate - 1) * 2, data.name, 
         Rect((rate - 1) * (tabWidth + tabSpacing) + marginH + numWidth + textLSpacing, 
             marginV + textMarginV + textHight + textSpacing,
             textWidth,
@@ -626,6 +634,11 @@ void endoControl::UpdateEndoStatus(EndoData data)
         }
     }
 
+    BSInterface.clearImage(14 + (rate - 1) * 4);
+    BSInterface.clearImage(15 + (rate - 1) * 4);
+    BSInterface.clearText(14);
+    BSInterface.clearText(15);
+
     BSInterface.drawImage(15 + (rate - 1) * 4, backgroundName, Rect(
         (rate - 1) * (tabWidth + tabSpacing) + marginH, 
         marginV, 
@@ -642,13 +655,13 @@ void endoControl::UpdateEndoStatus(EndoData data)
         (rate - 1) * (tabWidth + tabSpacing) + marginH + (tabWidth - energyMarginHR - energyWidth),
             marginV + energyMarginV + energyHight + energySpacing, 
         energyWidth, 
-        energyHight),0.5);
+        energyHight),0.2);
     
     BSInterface.drawText(15, zoomName, Rect(
         (rate - 1) * (tabWidth + tabSpacing) + marginH + (tabWidth - energyMarginHR - energyWidth),
             marginV + energyMarginV, 
         energyWidth, 
-        energyHight), 0.5);
+        energyHight), 0.2);
 }
 
 void endoControl::UpdateMsg(CustomErrorInfo info)
@@ -690,7 +703,7 @@ void endoControl::UpdateMsg(CustomErrorInfo info)
         BSInterface.drawImage(1, msgShowHide, Rect(2, 998, 80, 80));
         BSInterface.drawImage(2, msgLevel, Rect(82, 1008, 60, 60));
         BSInterface.drawImage(3, "Message_Back", Rect(82, 998, 1480, 80));
-        BSInterface.drawText(1, info.eContent, Rect(600, 20, 960, 50), 0.5);
+        BSInterface.drawText(1, info.eContent, Rect(154, 998, 960, 80), 0.5);
     }
 }
 
@@ -761,6 +774,10 @@ void endoControl::UpdatePopMsg(PopupInfo info)
 
     int rate = info.popSlave;
 
+    BSInterface.clearImage(6 + (rate - 1) * 2);
+    BSInterface.clearImage(7 + (rate - 1) * 2);
+    BSInterface.clearText(2 + (rate - 1) * 1);
+
     BSInterface.drawImage(6 + (rate - 1) * 2, backgroundName,
         Rect((rate - 1) * (tabWidth + tabSpacing) + marginH,
             marginV + tabHight + tabPopSpacing,
@@ -773,9 +790,61 @@ void endoControl::UpdatePopMsg(PopupInfo info)
             iconWidth,
             iconHight));
 
-    BSInterface.drawText(2 + (rate - 1) * 2, info.popContent,
-        Rect(rate * (tabWidth + tabSpacing) + marginH - tabSpacing - iconRMargin - iconWidth,
+    BSInterface.drawText(2 + (rate - 1) * 1, info.popContent,
+        Rect((rate - 1) * (tabWidth + tabSpacing) + marginH,
             marginV + tabHight + tabPopSpacing + iconBMargin,
             popWidth,
             popHight), 0.5);
+}
+
+void endoControl::ClearAllContent()
+{
+    BSInterface.clearImage(1);
+    BSInterface.clearImage(2);
+    BSInterface.clearImage(3);
+    BSInterface.clearImage(4);
+    BSInterface.clearImage(5);
+    BSInterface.clearImage(6);
+    BSInterface.clearImage(7);
+    BSInterface.clearImage(8);
+    BSInterface.clearImage(9);
+    BSInterface.clearImage(10);
+    BSInterface.clearImage(11);
+    BSInterface.clearImage(12);
+    BSInterface.clearImage(13);
+    BSInterface.clearImage(14);
+    BSInterface.clearImage(15);
+    BSInterface.clearImage(16);
+    BSInterface.clearImage(17);
+    BSInterface.clearImage(18);
+    BSInterface.clearImage(19);
+    BSInterface.clearImage(20);
+    BSInterface.clearImage(21);
+    BSInterface.clearImage(22);
+    BSInterface.clearImage(23);
+    BSInterface.clearImage(24);
+    BSInterface.clearImage(25);
+    BSInterface.clearImage(26);
+    BSInterface.clearImage(27);
+    BSInterface.clearImage(28);
+    BSInterface.clearImage(29);
+    BSInterface.clearImage(30);
+    BSInterface.clearImage(31);
+    BSInterface.clearImage(32);
+
+    BSInterface.clearText(1);
+    BSInterface.clearText(2);
+    BSInterface.clearText(3);
+    BSInterface.clearText(4);
+    BSInterface.clearText(5);
+    BSInterface.clearText(6);
+    BSInterface.clearText(7);
+    BSInterface.clearText(8);
+    BSInterface.clearText(9);
+    BSInterface.clearText(10);
+    BSInterface.clearText(11);
+    BSInterface.clearText(12);
+    BSInterface.clearText(13);
+    BSInterface.clearText(14);
+    BSInterface.clearText(15);
 }

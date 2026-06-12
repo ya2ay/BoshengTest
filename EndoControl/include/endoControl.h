@@ -53,6 +53,7 @@ public:
     void UpdateEndoStatus(EndoData);
     void UpdateMsg(CustomErrorInfo);
     void UpdatePopMsg(PopupInfo);
+    void ClearAllContent();
 
 private:
     STARTUPINFO si = { sizeof(si) };         // 控制窗口等启动信息

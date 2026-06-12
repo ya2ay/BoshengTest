@@ -37,7 +37,7 @@ BoShengTest::BoShengTest(QWidget *parent)
 
 BoShengTest::~BoShengTest()
 {
-
+    scope.ClearAllContent();
 }
 
 //Function
@@ -384,23 +384,23 @@ void BoShengTest::onUpdateMsg()
     switch (level)
     {
     case 0: {
-        info.eContent = ErrorLevel::INFO;
+        info.eLevel = ErrorLevel::INFO;
         break;
     }
     case 1: {
-        info.eContent = ErrorLevel::PROMPT;
+        info.eLevel = ErrorLevel::PROMPT;
         break;
     }
     case 2: {
-        info.eContent = ErrorLevel::WARNING;
+        info.eLevel = ErrorLevel::WARNING;
         break;
     }
     case 3: {
-        info.eContent = ErrorLevel::FAULT;
+        info.eLevel = ErrorLevel::FAULT;
         break;
     }
     default:
-        info.eContent = ErrorLevel::UNKNOW_LEVEL;
+        info.eLevel = ErrorLevel::UNKNOW_LEVEL;
     }
 
     info.isHide = ui.btnShowHideMsg->isChecked();
