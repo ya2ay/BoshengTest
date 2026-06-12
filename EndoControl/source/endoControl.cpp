@@ -410,7 +410,7 @@ void endoControl::LoadOSDImages()
     BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Inst4Indicator.png", 
         "InstIndicator4");
 
-    BSInterface.drawRectangle(1, Rect(1560, 0, 360, 1080),120, 100, 100, 1.0);
+    BSInterface.drawRectangle(100, Rect(1560, 0, 360, 1080),120, 100, 100, 0.8);
 }
     
 std::string endoControl::SlaveTypeToNumStatus(SlaveNum c) {
@@ -533,38 +533,61 @@ void endoControl::UpdateMsg(CustomErrorInfo info)
         BSInterface.clearImage(2);
         BSInterface.clearImage(3);
         BSInterface.clearText(1);
-        BSInterface.drawImage(1, msgShowHide, Rect(
-            UIConstants::UI_MARGIN_H, 
+        //BSInterface.drawImage(1, msgShowHide, Rect(
+        //    UIConstants::UI_MARGIN_H, 
+        //    UIConstants::UI_SCREENHIGHT - UIConstants::UI_MARGIN_V - UIConstants::UI_ICONHIGHT,
+        //    UIConstants::UI_ICONWIDTH, 
+        //    UIConstants::UI_ICONHIGHT));
+        BSInterface.drawRectangle(1, Rect(
+            UIConstants::UI_MARGIN_H,
             UIConstants::UI_SCREENHIGHT - UIConstants::UI_MARGIN_V - UIConstants::UI_ICONHIGHT,
-            UIConstants::UI_ICONWIDTH, 
-            UIConstants::UI_ICONHIGHT));
+            UIConstants::UI_ICONWIDTH,
+            UIConstants::UI_ICONHIGHT), 100, 50, 50, 0.5);
     }
     else
     {
         BSInterface.clearImage(1);
-        BSInterface.drawImage(1, msgShowHide, Rect(
+        BSInterface.drawRectangle(1, Rect(
             UIConstants::UI_MARGIN_H, 
             1080 - UIConstants::UI_MARGIN_V - UIConstants::UI_ICONHIGHT, 
             UIConstants::UI_ICONWIDTH, 
-            UIConstants::UI_ICONHIGHT));
+            UIConstants::UI_ICONHIGHT), 100, 40, 40, 0.5);
 
-        BSInterface.drawImage(3, "Message_Back", Rect(
+        BSInterface.drawRectangle(3, Rect(
             UIConstants::UI_MARGIN_H + UIConstants::UI_ICONWIDTH,
             UIConstants::UI_SCREENHIGHT - UIConstants::UI_MARGIN_V - UIConstants::UI_ICONHIGHT,
             UIConstants::UI_SCREENWIDTH - UIConstants::UI_RECTWIDTH - (UIConstants::UI_MARGIN_H * 2 + UIConstants::UI_ICONWIDTH),
-            UIConstants::UI_MSGHIGHT));
+            UIConstants::UI_MSGHIGHT), 80, 50, 50, 0.5);
 
-        BSInterface.drawImage(2, msgLevel, Rect(
+        BSInterface.drawRectangle(2, Rect(
             UIConstants::UI_MARGIN_H + UIConstants::UI_ICONWIDTH + UIConstants::UI_MINIICONMARGIN_H,
-            1080 - UIConstants::UI_MARGIN_V - UIConstants::UI_MINIICONMARGIN_V - UIConstants::UI_MINIICONHIGHT,
+            UIConstants::UI_SCREENHIGHT - UIConstants::UI_MARGIN_V - UIConstants::UI_MINIICONMARGIN_V - UIConstants::UI_MINIICONHIGHT,
             UIConstants::UI_MINIICONWIDTH,
-            UIConstants::UI_MINIICONHIGHT));
+            UIConstants::UI_MINIICONHIGHT), 80, 40, 40, 0.5);
+
+        //BSInterface.drawImage(1, msgShowHide, Rect(
+        //    UIConstants::UI_MARGIN_H,
+        //    1080 - UIConstants::UI_MARGIN_V - UIConstants::UI_ICONHIGHT,
+        //    UIConstants::UI_ICONWIDTH,
+        //    UIConstants::UI_ICONHIGHT));
+
+        //BSInterface.drawImage(3, "Message_Back", Rect(
+        //    UIConstants::UI_MARGIN_H + UIConstants::UI_ICONWIDTH,
+        //    UIConstants::UI_SCREENHIGHT - UIConstants::UI_MARGIN_V - UIConstants::UI_ICONHIGHT,
+        //    UIConstants::UI_SCREENWIDTH - UIConstants::UI_RECTWIDTH - (UIConstants::UI_MARGIN_H * 2 + UIConstants::UI_ICONWIDTH),
+        //    UIConstants::UI_MSGHIGHT));
+
+        //BSInterface.drawImage(2, msgLevel, Rect(
+        //    UIConstants::UI_MARGIN_H + UIConstants::UI_ICONWIDTH + UIConstants::UI_MINIICONMARGIN_H,
+        //    1080 - UIConstants::UI_MARGIN_V - UIConstants::UI_MINIICONMARGIN_V - UIConstants::UI_MINIICONHIGHT,
+        //    UIConstants::UI_MINIICONWIDTH,
+        //    UIConstants::UI_MINIICONHIGHT));
 
         BSInterface.drawText(1, info.eContent, Rect(
             UIConstants::UI_MARGIN_H + UIConstants::UI_ICONWIDTH + UIConstants::UI_MINIICONMARGIN_H * 2 + UIConstants::UI_MINIICONWIDTH,
-            UIConstants::UI_SCREENHIGHT - UIConstants::UI_MARGIN_V - UIConstants::UI_ICONHIGHT,
+            UIConstants::UI_SCREENHIGHT - UIConstants::UI_MARGIN_V - UIConstants::UI_MINIICONMARGIN_V - UIConstants::UI_MINIICONHIGHT,
             UIConstants::UI_SCREENWIDTH - UIConstants::UI_RECTWIDTH - (UIConstants::UI_MARGIN_H * 2 + UIConstants::UI_ICONWIDTH + UIConstants::UI_MINIICONMARGIN_H * 2 + UIConstants::UI_MINIICONWIDTH),
-            UIConstants::UI_MSGHIGHT), 0.5);
+            UIConstants::UI_MSGHIGHT - 40), 0.5);
     }
 }
 
@@ -602,45 +625,79 @@ void endoControl::UpdateInstStatus(InstData data)
     BSInterface.clearImage(17 + (rate - 1) * 4);
     BSInterface.clearText(6 + (rate - 1) * 2);
 
-    BSInterface.drawImage(15 + (rate - 1) * 4, backgroundName,
+    //BSInterface.drawImage(15 + (rate - 1) * 4, backgroundName,
+    //    Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
+    //        UIConstants::UI_MARGIN_V,
+    //        UIConstants::UI_TABWIDTH,
+    //        UIConstants::UI_TABHIGHT ));
+
+    //BSInterface.drawImage(14 + (rate - 1) * 4, numName,
+    //    Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
+    //        UIConstants::UI_MARGIN_V,
+    //        UIConstants::UI_NUMWIDTH,
+    //        UIConstants::UI_NUMHIGHT));
+
+    //BSInterface.drawImage(16 + (rate - 1) * 4, cutName,
+    //    Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYWIDTH - UIConstants::UI_ENERGYMARGIN_R),
+    //        UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V + UIConstants::UI_ENERGYHIGHT + UIConstants::UI_ENERGYSPACING_V,
+    //        UIConstants::UI_ENERGYWIDTH,
+    //        UIConstants::UI_ENERGYHIGHT));
+
+    //BSInterface.drawImage(17 + (rate - 1) * 4, coagName,
+    //    Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYWIDTH - UIConstants::UI_ENERGYMARGIN_R),
+    //        UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V,
+    //        UIConstants::UI_ENERGYWIDTH,
+    //        UIConstants::UI_ENERGYHIGHT));
+
+    BSInterface.drawRectangle(15 + (rate - 1) * 4, 
         Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
             UIConstants::UI_MARGIN_V,
             UIConstants::UI_TABWIDTH,
-            UIConstants::UI_TABHIGHT ));
+            UIConstants::UI_TABHIGHT), 40, 80, 40, 0.8);
 
-    BSInterface.drawImage(14 + (rate - 1) * 4, numName,
+    BSInterface.drawRectangle(14 + (rate - 1) * 4, 
         Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
             UIConstants::UI_MARGIN_V,
             UIConstants::UI_NUMWIDTH,
-            UIConstants::UI_NUMHIGHT));
+            UIConstants::UI_NUMHIGHT), 80, 80, 40, 0.8);
 
-    BSInterface.drawImage(16 + (rate - 1) * 4, cutName,
+    BSInterface.drawRectangle(16 + (rate - 1) * 4, 
         Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYWIDTH - UIConstants::UI_ENERGYMARGIN_R),
             UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V + UIConstants::UI_ENERGYHIGHT + UIConstants::UI_ENERGYSPACING_V,
             UIConstants::UI_ENERGYWIDTH,
-            UIConstants::UI_ENERGYHIGHT));
+            UIConstants::UI_ENERGYHIGHT), 40, 80, 80, 0.8);
 
-    BSInterface.drawImage(17 + (rate - 1) * 4, coagName,
+    BSInterface.drawRectangle(17 + (rate - 1) * 4, 
         Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYWIDTH - UIConstants::UI_ENERGYMARGIN_R),
             UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V,
             UIConstants::UI_ENERGYWIDTH,
-            UIConstants::UI_ENERGYHIGHT));
+            UIConstants::UI_ENERGYHIGHT), 40, 150, 40, 0.8);
 
     std::string energyStatusName = EnergyStatusToString(data.energyStatus);
 
     if (InstStatus_Master::LEFTHAND == data.masterType) {
         BSInterface.clearImage(4);
-        BSInterface.drawImage(4, energyStatusName, Rect(UIConstants::UI_MARGIN_H, 325, UIConstants::UI_SIDEENERGYWIDTH, UIConstants::UI_SIDEENERGYHIGHT));
+        /*BSInterface.drawImage(4, energyStatusName, Rect(UIConstants::UI_MARGIN_H, 325, UIConstants::UI_SIDEENERGYWIDTH, UIConstants::UI_SIDEENERGYHIGHT));*/
+        BSInterface.drawRectangle(4, Rect(
+            UIConstants::UI_MARGIN_H, 
+            325, 
+            UIConstants::UI_SIDEENERGYWIDTH, 
+            UIConstants::UI_SIDEENERGYHIGHT), 40, 150, 150, 0.2);
     }
     else if (InstStatus_Master::RIGHTHAND == data.masterType){
         BSInterface.clearImage(5);
-        BSInterface.drawImage(5, energyStatusName, Rect(1920 - 360 - UIConstants::UI_MARGIN_H, 325, UIConstants::UI_SIDEENERGYWIDTH, UIConstants::UI_SIDEENERGYHIGHT));
+        BSInterface.drawRectangle(5, Rect(
+            UIConstants::UI_SCREENWIDTH - UIConstants::UI_RECTWIDTH - UIConstants::UI_SIDEENERGYWIDTH - UIConstants::UI_MARGIN_H,
+            325, 
+            UIConstants::UI_SIDEENERGYWIDTH, 
+            UIConstants::UI_SIDEENERGYHIGHT), 150, 150, 10, 0.2);
     }
+
     BSInterface.drawText(6 + (rate - 1) * 2, data.name, 
         Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + UIConstants::UI_NUMWIDTH + UIConstants::UI_TEXTSPACING_L, 
             UIConstants::UI_MARGIN_V + UIConstants::UI_TEXTMARGIN_B + UIConstants::UI_TEXTHIGHT + UIConstants::UI_TEXTSPACING_V,
             UIConstants::UI_TEXTWIDTH,
-            UIConstants::UI_TEXTHIGHT), 0.5);
+            UIConstants::UI_TEXTHIGHT), 0.4);
 }
 
 void endoControl::UpdateEndoStatus(EndoData data)
@@ -688,23 +745,41 @@ void endoControl::UpdateEndoStatus(EndoData data)
     BSInterface.clearText(14);
     BSInterface.clearText(15);
 
-    BSInterface.drawImage(15 + (rate - 1) * 4, backgroundName, Rect(
-        (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H, 
-        UIConstants::UI_MARGIN_V, 
-        UIConstants::UI_TABWIDTH, 
-        UIConstants::UI_TABHIGHT ));
+    //BSInterface.drawImage(15 + (rate - 1) * 4, backgroundName, Rect(
+    //    (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H, 
+    //    UIConstants::UI_MARGIN_V, 
+    //    UIConstants::UI_TABWIDTH, 
+    //    UIConstants::UI_TABHIGHT ));
 
-    BSInterface.drawImage(14 + (rate - 1) * 4, numName,Rect(
-        (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H, 
-        UIConstants::UI_MARGIN_V, 
-        UIConstants::UI_NUMWIDTH, 
-        UIConstants::UI_NUMHIGHT));
+    //BSInterface.drawImage(14 + (rate - 1) * 4, numName,Rect(
+    //    (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H, 
+    //    UIConstants::UI_MARGIN_V, 
+    //    UIConstants::UI_NUMWIDTH, 
+    //    UIConstants::UI_NUMHIGHT));
 
-    BSInterface.drawImage(32, typeName, Rect(
+    //BSInterface.drawImage(32, typeName, Rect(
+    //    (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYMARGIN_R - UIConstants::UI_ENERGYWIDTH - UIConstants::UI_ENERGYMARGIN_L - UIConstants::UI_ENDOTYPEWIDTH),
+    //    UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V,
+    //    UIConstants::UI_ENDOTYPEWIDTH,
+    //    UIConstants::UI_ENDOTYPEHIGHT));
+
+    BSInterface.drawRectangle(15 + (rate - 1) * 4, Rect(
+        (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
+        UIConstants::UI_MARGIN_V,
+        UIConstants::UI_TABWIDTH,
+        UIConstants::UI_TABHIGHT),22, 44, 66, 0.3);
+
+    BSInterface.drawRectangle(14 + (rate - 1) * 4, Rect(
+        (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
+        UIConstants::UI_MARGIN_V,
+        UIConstants::UI_NUMWIDTH,
+        UIConstants::UI_NUMHIGHT), 66, 22, 44, 0.3);
+
+    BSInterface.drawRectangle(32, Rect(
         (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYMARGIN_R - UIConstants::UI_ENERGYWIDTH - UIConstants::UI_ENERGYMARGIN_L - UIConstants::UI_ENDOTYPEWIDTH),
-        UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V,
+        UIConstants::UI_MARGIN_V,
         UIConstants::UI_ENDOTYPEWIDTH,
-        UIConstants::UI_ENDOTYPEHIGHT));
+        UIConstants::UI_ENDOTYPEHIGHT), 88, 44, 66, 0.3);
 
     BSInterface.drawText(14, fireflyName,Rect(
         (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYMARGIN_R - UIConstants::UI_ENERGYWIDTH),
@@ -779,23 +854,35 @@ void endoControl::UpdatePopMsg(PopupInfo info)
     BSInterface.clearImage(7 + (rate - 1) * 2);
     BSInterface.clearText(2 + (rate - 1) * 1);
 
-    BSInterface.drawImage(6 + (rate - 1) * 2, backgroundName,
-        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
-            UIConstants::UI_MARGIN_V + UIConstants::UI_TABHIGHT  + UIConstants::UI_TABPOPSPACING,
-            UIConstants::UI_POPWIDTH,
-            UIConstants::UI_POPHIGHT));
+    //BSInterface.drawImage(6 + (rate - 1) * 2, backgroundName,
+    //    Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
+    //        UIConstants::UI_MARGIN_V + UIConstants::UI_TABHIGHT  + UIConstants::UI_TABPOPSPACING,
+    //        UIConstants::UI_POPWIDTH,
+    //        UIConstants::UI_POPHIGHT));
 
-    BSInterface.drawImage(7 + (rate - 1) * 2, iconName,
+    //BSInterface.drawImage(7 + (rate - 1) * 2, iconName,
+    //    Rect(rate * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H - UIConstants::UI_TABSPACING - UIConstants::UI_ICONMARGIN_H - UIConstants::UI_ICONWIDTH,
+    //        UIConstants::UI_MARGIN_V + UIConstants::UI_TABHIGHT  + UIConstants::UI_TABPOPSPACING + UIConstants::UI_ICONMARGIN_V,
+    //        UIConstants::UI_ICONWIDTH,
+    //        UIConstants::UI_ICONHIGHT));
+
+    BSInterface.drawRectangle(6 + (rate - 1) * 2, 
+        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
+            UIConstants::UI_MARGIN_V + UIConstants::UI_TABHIGHT + UIConstants::UI_TABPOPSPACING,
+            UIConstants::UI_POPWIDTH,
+            UIConstants::UI_POPHIGHT), 22, 44, 166, 0.3);
+
+    BSInterface.drawRectangle(7 + (rate - 1) * 2, 
         Rect(rate * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H - UIConstants::UI_TABSPACING - UIConstants::UI_ICONMARGIN_H - UIConstants::UI_ICONWIDTH,
-            UIConstants::UI_MARGIN_V + UIConstants::UI_TABHIGHT  + UIConstants::UI_TABPOPSPACING + UIConstants::UI_ICONMARGIN_V,
+            UIConstants::UI_MARGIN_V + UIConstants::UI_TABHIGHT + UIConstants::UI_TABPOPSPACING + UIConstants::UI_ICONMARGIN_V,
             UIConstants::UI_ICONWIDTH,
-            UIConstants::UI_ICONHIGHT));
+            UIConstants::UI_ICONHIGHT), 22, 144, 66, 0.3);
 
     BSInterface.drawText(2 + (rate - 1) * 1, info.popContent,
-        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
+        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + 16,
             UIConstants::UI_MARGIN_V + UIConstants::UI_TABHIGHT  + UIConstants::UI_TABPOPSPACING + UIConstants::UI_ICONMARGIN_V,
-            UIConstants::UI_POPWIDTH,
-            UIConstants::UI_POPHIGHT), 0.5);
+            270,
+            UIConstants::UI_ICONHIGHT), 0.5);
 }
 
 //Single Status Update
@@ -916,6 +1003,40 @@ void endoControl::ClearAllContent()
     BSInterface.clearImage(30);
     BSInterface.clearImage(31);
     BSInterface.clearImage(32);
+
+    BSInterface.clearRectangle(1);
+    BSInterface.clearRectangle(2);
+    BSInterface.clearRectangle(3);
+    BSInterface.clearRectangle(4);
+    BSInterface.clearRectangle(5);
+    BSInterface.clearRectangle(6);
+    BSInterface.clearRectangle(7);
+    BSInterface.clearRectangle(8);
+    BSInterface.clearRectangle(9);
+    BSInterface.clearRectangle(10);
+    BSInterface.clearRectangle(11);
+    BSInterface.clearRectangle(12);
+    BSInterface.clearRectangle(13);
+    BSInterface.clearRectangle(14);
+    BSInterface.clearRectangle(15);
+    BSInterface.clearRectangle(16);
+    BSInterface.clearRectangle(17);
+    BSInterface.clearRectangle(18);
+    BSInterface.clearRectangle(19);
+    BSInterface.clearRectangle(20);
+    BSInterface.clearRectangle(21);
+    BSInterface.clearRectangle(22);
+    BSInterface.clearRectangle(23);
+    BSInterface.clearRectangle(24);
+    BSInterface.clearRectangle(25);
+    BSInterface.clearRectangle(26);
+    BSInterface.clearRectangle(27);
+    BSInterface.clearRectangle(28);
+    BSInterface.clearRectangle(29);
+    BSInterface.clearRectangle(30);
+    BSInterface.clearRectangle(31);
+    BSInterface.clearRectangle(32);
+    BSInterface.clearRectangle(100);
 
     BSInterface.clearText(1);
     BSInterface.clearText(2);

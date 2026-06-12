@@ -14,13 +14,13 @@ const int UIConstants::UI_TABHIGHT = 80;
 const int UIConstants::UI_NUMWIDTH = 80;
 const int UIConstants::UI_NUMHIGHT = 80;
 
-const int UIConstants::UI_TEXTWIDTH = 270;
+const int UIConstants::UI_TEXTWIDTH = 184;
 const int UIConstants::UI_TEXTHIGHT = 36;
 
 const int UIConstants::UI_ENERGYWIDTH = 80;
 const int UIConstants::UI_ENERGYHIGHT = 36;
 
-const int UIConstants::UI_POPWIDTH = 476;
+const int UIConstants::UI_POPWIDTH = 386;
 const int UIConstants::UI_POPHIGHT = 100;
 
 const int UIConstants::UI_ICONWIDTH = 80;
@@ -61,7 +61,7 @@ const int UIConstants::UI_MSGHIGHT = 80;
 const int UIConstants::UI_MSGMARGIN_H = 10;
 const int UIConstants::UI_MSGMARGIN_V = 10;
 
-const int UIConstants::UI_POPMSGWIDTH = 366;
+const int UIConstants::UI_POPMSGWIDTH = 270;
 const int UIConstants::UI_POPMSGHIGHT = 80;
 
 const int UIConstants::UI_POPMSGMARGIN_H = 10;
