@@ -93,9 +93,18 @@ void endoControl::on3DCalib()
     BSInterface.pressCameraHeadButton(0, false);
 }
 
-void endoControl::onFirefly()
+void endoControl::onFirefly(int type)
 {
-    BSInterface.changeParameter(Parameters::fluo_mode, "1");
+    switch (type)
+    {
+    case 0:
+        BSInterface.changeParameter(Parameters::fluo_mode, "0");
+        break;
+    case 1:
+        BSInterface.changeParameter(Parameters::fluo_mode, "1");
+        break;
+    }
+
     //BSInterface.pressCameraHeadButton(1, false); 
 }
 

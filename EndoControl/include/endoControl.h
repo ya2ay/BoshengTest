@@ -20,7 +20,7 @@ public:
     bool Connect(std::string ipAddress = "192.168.1.222");
 
     void on3DCalib();
-    void onFirefly();
+    void onFirefly(int);
     void onFireflyMode(int mode);
 
     void on3Dto2D(bool type);

@@ -162,8 +162,8 @@ void BoShengTest::on3DCalib()
 
 void BoShengTest::onFirefly()
 {
-    scope.onFirefly();
     bFireflyOn = !bFireflyOn;
+    scope.onFirefly(bFireflyOn ? 1 : 0);
     if(bFireflyOn)
         ui.sldFirefly->setDisabled(false);
     else
