@@ -1,4 +1,5 @@
 ﻿#include "endoControl.h"
+#include "UIConstants.h"
 
 using namespace Proxinse;
 using namespace Proxinse::CSR;
@@ -501,31 +502,75 @@ std::string  endoControl::EnergyStatusToString(InstStatus_EnergyStatus s)
     return "";
 }
 
+void endoControl::UpdateMsg(CustomErrorInfo info)
+{
+    std::string msgShowHide = "";
+    if (info.isHide)
+        msgShowHide = "Message_Hide";
+    else
+        msgShowHide = "Message_Show";
+
+    std::string msgLevel = "";
+
+    switch (info.eLevel) {
+    case ErrorLevel::INFO:
+        msgLevel = "Message_Info";
+        break;
+    case ErrorLevel::PROMPT:
+        msgLevel = "Message_Prompt";
+        break;
+    case ErrorLevel::WARNING:
+        msgLevel = "Message_Warning";
+        break;
+    case ErrorLevel::FAULT:
+        msgLevel = "Message_Fault";
+        break;
+    }
+
+    if (info.isHide)
+    {
+        BSInterface.clearImage(1);
+        BSInterface.clearImage(2);
+        BSInterface.clearImage(3);
+        BSInterface.clearText(1);
+        BSInterface.drawImage(1, msgShowHide, Rect(
+            UIConstants::UI_MARGIN_H, 
+            UIConstants::UI_SCREENHIGHT - UIConstants::UI_MARGIN_V - UIConstants::UI_ICONHIGHT,
+            UIConstants::UI_ICONWIDTH, 
+            UIConstants::UI_ICONHIGHT));
+    }
+    else
+    {
+        BSInterface.clearImage(1);
+        BSInterface.drawImage(1, msgShowHide, Rect(
+            UIConstants::UI_MARGIN_H, 
+            1080 - UIConstants::UI_MARGIN_V - UIConstants::UI_ICONHIGHT, 
+            UIConstants::UI_ICONWIDTH, 
+            UIConstants::UI_ICONHIGHT));
+
+        BSInterface.drawImage(3, "Message_Back", Rect(
+            UIConstants::UI_MARGIN_H + UIConstants::UI_ICONWIDTH,
+            UIConstants::UI_SCREENHIGHT - UIConstants::UI_MARGIN_V - UIConstants::UI_ICONHIGHT,
+            UIConstants::UI_SCREENWIDTH - UIConstants::UI_RECTWIDTH - (UIConstants::UI_MARGIN_H * 2 + UIConstants::UI_ICONWIDTH),
+            UIConstants::UI_MSGHIGHT));
+
+        BSInterface.drawImage(2, msgLevel, Rect(
+            UIConstants::UI_MARGIN_H + UIConstants::UI_ICONWIDTH + UIConstants::UI_MINIICONMARGIN_H,
+            1080 - UIConstants::UI_MARGIN_V - UIConstants::UI_MINIICONMARGIN_V - UIConstants::UI_MINIICONHIGHT,
+            UIConstants::UI_MINIICONWIDTH,
+            UIConstants::UI_MINIICONHIGHT));
+
+        BSInterface.drawText(1, info.eContent, Rect(
+            UIConstants::UI_MARGIN_H + UIConstants::UI_ICONWIDTH + UIConstants::UI_MINIICONMARGIN_H * 2 + UIConstants::UI_MINIICONWIDTH,
+            UIConstants::UI_SCREENHIGHT - UIConstants::UI_MARGIN_V - UIConstants::UI_ICONHIGHT,
+            UIConstants::UI_SCREENWIDTH - UIConstants::UI_RECTWIDTH - (UIConstants::UI_MARGIN_H * 2 + UIConstants::UI_ICONWIDTH + UIConstants::UI_MINIICONMARGIN_H * 2 + UIConstants::UI_MINIICONWIDTH),
+            UIConstants::UI_MSGHIGHT), 0.5);
+    }
+}
+
+//Arm-Level Status Update
 void endoControl::UpdateInstStatus(InstData data)
 {
-    int marginH = 2;
-    int marginV = 2;
-
-    int tabSpacing = 4;
-
-    int tabWidth = 386;
-    int tabHight = 80;
-
-    int numWidth = 80;
-    int numHight = 80;
-
-    int energyWidth = 80;
-    int energyHight = 36;
-    int energySpacing = 4;
-    int energyMarginV = 2;
-    int energyRMargin = 10;
-
-    int textWidth = 270;
-    int textHight = 36;
-    int textSpacing = 4;
-    int textLSpacing = 16;
-    int textMarginV = 2;
-
     std::string backgroundName = "Background_";
     std::string numName = "";
     std::string cutName = "";
@@ -548,11 +593,9 @@ void endoControl::UpdateInstStatus(InstData data)
         cutName = "Energy_Cut";
     else if (InstStatus_Energy::COAGABLE == data.energyType)
         coagName = "Energy_Coag";
-    else if(InstStatus_Energy::BIOPOLAR == data.energyType)
+    else if (InstStatus_Energy::BIOPOLAR == data.energyType)
         coagName = "Energy_Biopolar";
 
-    BSInterface.clearImage(4);
-    BSInterface.clearImage(5);
     BSInterface.clearImage(14 + (rate - 1) * 4);
     BSInterface.clearImage(15 + (rate - 1) * 4);
     BSInterface.clearImage(16 + (rate - 1) * 4);
@@ -560,62 +603,48 @@ void endoControl::UpdateInstStatus(InstData data)
     BSInterface.clearText(6 + (rate - 1) * 2);
 
     BSInterface.drawImage(15 + (rate - 1) * 4, backgroundName,
-        Rect((rate - 1) * (tabWidth + tabSpacing) + marginH, 
-            marginV, 
-            tabWidth, 
-            tabHight));
+        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
+            UIConstants::UI_MARGIN_V,
+            UIConstants::UI_TABWIDTH,
+            UIConstants::UI_TABHIGHT ));
 
     BSInterface.drawImage(14 + (rate - 1) * 4, numName,
-        Rect((rate - 1) * (tabWidth + tabSpacing) + marginH, 
-            marginV, 
-            numWidth, 
-            numHight));
+        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
+            UIConstants::UI_MARGIN_V,
+            UIConstants::UI_NUMWIDTH,
+            UIConstants::UI_NUMHIGHT));
 
     BSInterface.drawImage(16 + (rate - 1) * 4, cutName,
-        Rect((rate - 1) * (tabWidth + tabSpacing) + marginH + (tabWidth - energyWidth - energyRMargin),
-            marginV + energyMarginV + energyHight + energySpacing, 
-            energyWidth, 
-            energyHight));
+        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYWIDTH - UIConstants::UI_ENERGYMARGIN_R),
+            UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V + UIConstants::UI_ENERGYHIGHT + UIConstants::UI_ENERGYSPACING_V,
+            UIConstants::UI_ENERGYWIDTH,
+            UIConstants::UI_ENERGYHIGHT));
 
     BSInterface.drawImage(17 + (rate - 1) * 4, coagName,
-        Rect((rate - 1) * (tabWidth + tabSpacing) + marginH + (tabWidth - energyWidth - energyRMargin),
-            marginV + energyMarginV, 
-            energyWidth, 
-            energyHight));
+        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYWIDTH - UIConstants::UI_ENERGYMARGIN_R),
+            UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V,
+            UIConstants::UI_ENERGYWIDTH,
+            UIConstants::UI_ENERGYHIGHT));
 
     std::string energyStatusName = EnergyStatusToString(data.energyStatus);
 
-    if(InstStatus_Master::LEFTHAND == data.masterType)
-        BSInterface.drawImage(4, energyStatusName,Rect(2, 325, 20, 540));
-    else if (InstStatus_Master::RIGHTHAND == data.masterType)
-        BSInterface.drawImage(5, energyStatusName, Rect(1898, 325, 20, 540));
-
+    if (InstStatus_Master::LEFTHAND == data.masterType) {
+        BSInterface.clearImage(4);
+        BSInterface.drawImage(4, energyStatusName, Rect(UIConstants::UI_MARGIN_H, 325, UIConstants::UI_SIDEENERGYWIDTH, UIConstants::UI_SIDEENERGYHIGHT));
+    }
+    else if (InstStatus_Master::RIGHTHAND == data.masterType){
+        BSInterface.clearImage(5);
+        BSInterface.drawImage(5, energyStatusName, Rect(1920 - 360 - UIConstants::UI_MARGIN_H, 325, UIConstants::UI_SIDEENERGYWIDTH, UIConstants::UI_SIDEENERGYHIGHT));
+    }
     BSInterface.drawText(6 + (rate - 1) * 2, data.name, 
-        Rect((rate - 1) * (tabWidth + tabSpacing) + marginH + numWidth + textLSpacing, 
-            marginV + textMarginV + textHight + textSpacing,
-            textWidth,
-            textHight), 0.5);
+        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + UIConstants::UI_NUMWIDTH + UIConstants::UI_TEXTSPACING_L, 
+            UIConstants::UI_MARGIN_V + UIConstants::UI_TEXTMARGIN_B + UIConstants::UI_TEXTHIGHT + UIConstants::UI_TEXTSPACING_V,
+            UIConstants::UI_TEXTWIDTH,
+            UIConstants::UI_TEXTHIGHT), 0.5);
 }
 
 void endoControl::UpdateEndoStatus(EndoData data)
 {
-    int marginH = 2;
-    int marginV = 2;
-
-    int tabSpacing = 4;
-
-    int tabWidth = 386;
-    int tabHight = 80;
-
-    int numWidth = 80;
-    int numHight = 80;
-
-    int energyWidth = 80;
-    int energyHight = 36;
-    int energySpacing = 4;
-    int energyMarginV = 2;
-    int energyMarginHR = 10;
-
     std::string backgroundName = "Background_S";
     std::string numName = "";
     std::string typeName = "";
@@ -650,119 +679,56 @@ void endoControl::UpdateEndoStatus(EndoData data)
     else
         typeName = "Endo_0";
 
-    std::list<std::string> content = BSInterface.LogInfo();
-    std::map<std::string, std::string> paraMap;
-    for (const auto& info : content) {
-        std::pair<std::string, std::string> sspair = parseInitString(info);
-        if (!sspair.first.empty() && !sspair.second.empty()) {
-            paraMap.insert({ sspair.first, sspair.second });
-        }
-    }
-
-    if (paraMap.find("zoom") != paraMap.end()) {
-        zoomName = paraMap["zoom"] + "x";
-    }
-    if (paraMap.find("fluo_mode") != paraMap.end()) {
-        if (std::stoi(paraMap["fluo_mode"])){
-            fireflyName = "Firefly On";
-        }
-        else{
-            fireflyName = "Firefly Off";
-        }
-    }
+    zoomName = std::to_string(data.zoom) + "x";
+    fireflyName = data.isFireflyOn ? "Firefly On" : "Firefly Off";
 
     BSInterface.clearImage(14 + (rate - 1) * 4);
     BSInterface.clearImage(15 + (rate - 1) * 4);
+    BSInterface.clearImage(32);
     BSInterface.clearText(14);
     BSInterface.clearText(15);
 
     BSInterface.drawImage(15 + (rate - 1) * 4, backgroundName, Rect(
-        (rate - 1) * (tabWidth + tabSpacing) + marginH, 
-        marginV, 
-        tabWidth, 
-        tabHight));
+        (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H, 
+        UIConstants::UI_MARGIN_V, 
+        UIConstants::UI_TABWIDTH, 
+        UIConstants::UI_TABHIGHT ));
 
     BSInterface.drawImage(14 + (rate - 1) * 4, numName,Rect(
-        (rate - 1) * (tabWidth + tabSpacing) + marginH, 
-        marginV, 
-        numWidth, 
-        numHight));
+        (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H, 
+        UIConstants::UI_MARGIN_V, 
+        UIConstants::UI_NUMWIDTH, 
+        UIConstants::UI_NUMHIGHT));
+
+    BSInterface.drawImage(32, typeName, Rect(
+        (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYMARGIN_R - UIConstants::UI_ENERGYWIDTH - UIConstants::UI_ENERGYMARGIN_L - UIConstants::UI_ENDOTYPEWIDTH),
+        UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V,
+        UIConstants::UI_ENDOTYPEWIDTH,
+        UIConstants::UI_ENDOTYPEHIGHT));
 
     BSInterface.drawText(14, fireflyName,Rect(
-        (rate - 1) * (tabWidth + tabSpacing) + marginH + (tabWidth - energyMarginHR - energyWidth),
-            marginV + energyMarginV + energyHight + energySpacing, 
-        energyWidth, 
-        energyHight),0.2);
+        (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYMARGIN_R - UIConstants::UI_ENERGYWIDTH),
+        UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V + UIConstants::UI_ENERGYHIGHT + UIConstants::UI_ENERGYSPACING_V, 
+        UIConstants::UI_ENERGYWIDTH, 
+        UIConstants::UI_ENERGYHIGHT),0.2);
     
     BSInterface.drawText(15, zoomName, Rect(
-        (rate - 1) * (tabWidth + tabSpacing) + marginH + (tabWidth - energyMarginHR - energyWidth),
-            marginV + energyMarginV, 
-        energyWidth, 
-        energyHight), 0.2);
-}
-
-void endoControl::UpdateMsg(CustomErrorInfo info)
-{
-    std::string msgShowHide = "";
-    if (info.isHide)
-        msgShowHide = "Message_Hide";
-    else
-        msgShowHide = "Message_Show";
-
-    std::string msgLevel = "";
-
-    switch (info.eLevel) {
-    case ErrorLevel::INFO:
-        msgLevel = "Message_Info";
-        break;
-    case ErrorLevel::PROMPT:
-        msgLevel = "Message_Prompt";
-        break;
-    case ErrorLevel::WARNING:
-        msgLevel = "Message_Warning";
-        break;
-    case ErrorLevel::FAULT:
-        msgLevel = "Message_Fault";
-        break;
-    }
-
-    if (info.isHide)
-    {
-        BSInterface.clearImage(1);
-        BSInterface.clearImage(2);
-        BSInterface.clearImage(3);
-        BSInterface.clearText(1);
-        BSInterface.drawImage(1, msgShowHide, Rect(2, 998, 80, 80));
-    }
-    else
-    {
-        BSInterface.clearImage(1);
-        BSInterface.drawImage(1, msgShowHide, Rect(2, 998, 80, 80));
-        BSInterface.drawImage(2, msgLevel, Rect(82, 1008, 60, 60));
-        BSInterface.drawImage(3, "Message_Back", Rect(82, 998, 1480, 80));
-        BSInterface.drawText(1, info.eContent, Rect(154, 998, 960, 80), 0.5);
-    }
+        (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYMARGIN_R - UIConstants::UI_ENERGYWIDTH),
+        UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V, 
+        UIConstants::UI_ENERGYWIDTH, 
+        UIConstants::UI_ENERGYHIGHT), 0.2);
 }
 
 void endoControl::UpdatePopMsg(PopupInfo info)
 {
-    int marginH = 2;
-    int marginV = 2;
+    int rate = info.popSlave;
 
-    int tabSpacing = 4;
-    int tabPopSpacing = 4;
+    BSInterface.clearImage(6 + (rate - 1) * 2);
+    BSInterface.clearImage(7 + (rate - 1) * 2);
+    BSInterface.clearText(2 + (rate - 1) * 1);
 
-    int tabWidth = 386;
-    int tabHight = 80;
-
-    int popWidth = 476;
-    int popHight = 100;
-
-    int iconWidth = 80;
-    int iconHight = 80;
-
-    int iconRMargin = 10;
-    int iconBMargin = 10;
+    if (info.isHide)
+        return;
 
     std::string backgroundName = "Popup_Bg";
     std::string iconName = "Popup_";
@@ -809,29 +775,111 @@ void endoControl::UpdatePopMsg(PopupInfo info)
         return;
     }
 
-    int rate = info.popSlave;
-
     BSInterface.clearImage(6 + (rate - 1) * 2);
     BSInterface.clearImage(7 + (rate - 1) * 2);
     BSInterface.clearText(2 + (rate - 1) * 1);
 
     BSInterface.drawImage(6 + (rate - 1) * 2, backgroundName,
-        Rect((rate - 1) * (tabWidth + tabSpacing) + marginH,
-            marginV + tabHight + tabPopSpacing,
-            popWidth,
-            popHight));
+        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
+            UIConstants::UI_MARGIN_V + UIConstants::UI_TABHIGHT  + UIConstants::UI_TABPOPSPACING,
+            UIConstants::UI_POPWIDTH,
+            UIConstants::UI_POPHIGHT));
 
     BSInterface.drawImage(7 + (rate - 1) * 2, iconName,
-        Rect(rate * (tabWidth + tabSpacing) + marginH - tabSpacing - iconRMargin - iconWidth,
-            marginV + tabHight + tabPopSpacing + iconBMargin,
-            iconWidth,
-            iconHight));
+        Rect(rate * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H - UIConstants::UI_TABSPACING - UIConstants::UI_ICONMARGIN_H - UIConstants::UI_ICONWIDTH,
+            UIConstants::UI_MARGIN_V + UIConstants::UI_TABHIGHT  + UIConstants::UI_TABPOPSPACING + UIConstants::UI_ICONMARGIN_V,
+            UIConstants::UI_ICONWIDTH,
+            UIConstants::UI_ICONHIGHT));
 
     BSInterface.drawText(2 + (rate - 1) * 1, info.popContent,
-        Rect((rate - 1) * (tabWidth + tabSpacing) + marginH,
-            marginV + tabHight + tabPopSpacing + iconBMargin,
-            popWidth,
-            popHight), 0.5);
+        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
+            UIConstants::UI_MARGIN_V + UIConstants::UI_TABHIGHT  + UIConstants::UI_TABPOPSPACING + UIConstants::UI_ICONMARGIN_V,
+            UIConstants::UI_POPWIDTH,
+            UIConstants::UI_POPHIGHT), 0.5);
+}
+
+//Single Status Update
+void endoControl::UpdateEnergyStatus(EnergyData data)
+{
+    std::string energyStatusName = EnergyStatusToString(data.energyStatus);
+
+    if (InstStatus_Master::LEFTHAND == data.masterType) {
+        BSInterface.clearImage(4);
+        BSInterface.drawImage(4, energyStatusName, Rect(UIConstants::UI_MARGIN_H, 325, UIConstants::UI_SIDEENERGYWIDTH, UIConstants::UI_SIDEENERGYHIGHT));
+    }
+    else if (InstStatus_Master::RIGHTHAND == data.masterType) {
+        BSInterface.clearImage(5);
+        BSInterface.drawImage(5, energyStatusName, Rect(1920 - 360 - UIConstants::UI_MARGIN_H, 325, UIConstants::UI_SIDEENERGYWIDTH, UIConstants::UI_SIDEENERGYHIGHT));
+    }
+}
+
+void endoControl::UpdateControlStatus(ControlData data)
+{
+    std::string numName = "";
+    int rate = data.slaveType;
+    std::string strNumber = SlaveTypeToNumStatus(data.slaveType);
+    std::string strStatus = SlaveStatusToNumStatus(data.masterType, data.controlType);
+    numName = strNumber + strStatus;
+
+    BSInterface.clearImage(14 + (rate - 1) * 4);
+
+    BSInterface.drawImage(14 + (rate - 1) * 4, numName,
+        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
+            UIConstants::UI_MARGIN_V,
+            UIConstants::UI_NUMWIDTH,
+            UIConstants::UI_NUMHIGHT));
+}
+
+void endoControl::UpdateEndoZoom(ZoomData data)
+{
+    int rate = data.slaveIndex;
+
+    std::string zoomName = "";
+    zoomName = std::to_string(data.zoom) + "x";
+
+    BSInterface.clearText(15);
+    BSInterface.drawText(15, zoomName, Rect(
+        (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYMARGIN_R - UIConstants::UI_ENERGYWIDTH),
+        UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V,
+        UIConstants::UI_ENERGYWIDTH,
+        UIConstants::UI_ENERGYHIGHT), 0.2);
+}
+
+void endoControl::UpdateEndoFluro(FluroData data)
+{
+    int rate = data.slaveIndex;
+
+    std::string fireflyName = "";
+    fireflyName = data.isFireflyOn ? "Firefly On" : "Firefly Off";
+
+    BSInterface.clearText(14);
+    BSInterface.drawText(14, fireflyName, Rect(
+        (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYMARGIN_R - UIConstants::UI_ENERGYWIDTH),
+        UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V + UIConstants::UI_ENERGYHIGHT + UIConstants::UI_ENERGYSPACING_V,
+        UIConstants::UI_ENERGYWIDTH,
+        UIConstants::UI_ENERGYHIGHT), 0.2);
+}
+
+void endoControl::UpdateEndoType(EndoTypeData data)
+{
+    int rate = data.slaveIndex;
+    std::string typeName = "";
+    if (data.is30Degree)
+    {
+        if (data.isSocpeUp)
+            typeName = "Endo_30Up";
+        else
+            typeName = "Endo_30Down";
+    }
+    else
+        typeName = "Endo_0";
+
+    BSInterface.clearImage(32);
+    BSInterface.drawImage(32, typeName, Rect(
+        (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYMARGIN_R - UIConstants::UI_ENERGYWIDTH - UIConstants::UI_ENERGYMARGIN_L - UIConstants::UI_ENDOTYPEWIDTH),
+        UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V,
+        UIConstants::UI_ENDOTYPEWIDTH,
+        UIConstants::UI_ENDOTYPEHIGHT));
 }
 
 void endoControl::ClearAllContent()

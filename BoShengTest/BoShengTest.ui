@@ -31,7 +31,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>825</width>
+      <width>840</width>
       <height>982</height>
      </rect>
     </property>
@@ -1395,6 +1395,16 @@
             </widget>
            </item>
            <item>
+            <widget class="QCheckBox" name="btnPopShowHide">
+             <property name="text">
+              <string>Hide</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QPushButton" name="btnSendPopMsg">
              <property name="text">
               <string>Pop</string>
@@ -1414,6 +1424,9 @@
        </item>
        <item>
         <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>

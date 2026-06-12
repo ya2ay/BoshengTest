@@ -434,6 +434,7 @@ void BoShengTest::onUpdateMsg()
 void BoShengTest::onUpdatePopMsg()
 {
     PopupInfo info;
+    info.isHide = ui.btnPopShowHide->isChecked();
 
     int armIndex = ui.cbbPopArm->currentText().toInt();
     switch (armIndex)

@@ -53,6 +53,19 @@ struct InstPosition {
 	int z;
 };
 
+struct EnergyData
+{
+	InstStatus_Master masterType;
+	InstStatus_EnergyStatus energyStatus;
+};
+
+struct ControlData
+{
+	SlaveNum slaveType;
+	InstStatus_Master masterType;
+	InstStatus_Control controlType;
+};
+
 struct InstData
 {
 	std::string name;
@@ -73,6 +86,25 @@ struct EndoAttitude {
 	double pitch;
 };
 
+struct ZoomData
+{
+	int slaveIndex;
+	float zoom;
+};
+
+struct FluroData
+{
+	int slaveIndex;
+	bool isFireflyOn;
+};
+
+struct EndoTypeData
+{
+	int slaveIndex;
+	bool is30Degree;
+	bool isSocpeUp;
+};
+
 struct EndoData
 {
 	std::string name;
@@ -80,6 +112,8 @@ struct EndoData
 	//EndoStatus_Control status;
 	bool is30Degree;
 	bool isSocpeUp;
+	float zoom;
+	bool isFireflyOn;
 	EndoAttitude att;
 };
 
@@ -108,6 +142,7 @@ enum PopupOwner{
 
 struct PopupInfo
 {
+	bool isHide;
 	SlaveNum popSlave;
 	ErrorLevel popLevel;
 	PopupOwner popOwner;

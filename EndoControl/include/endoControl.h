@@ -49,8 +49,17 @@ public:
     void LoadOSDImages();
     void UpdateInstStatus(InstData);
     void UpdateEndoStatus(EndoData);
-    void UpdateMsg(CustomErrorInfo);
     void UpdatePopMsg(PopupInfo);
+
+    void UpdateMsg(CustomErrorInfo);
+
+    void UpdateEnergyStatus(EnergyData data);
+    void UpdateControlStatus(ControlData data);
+
+    void UpdateEndoZoom(ZoomData data);
+    void UpdateEndoFluro(FluroData data);
+    void UpdateEndoType(EndoTypeData data);
+
     void ClearAllContent();
 
 private:
