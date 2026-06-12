@@ -226,12 +226,8 @@ void BoShengTest::onScopeRotate(bool checked)
 void BoShengTest::onLog()
 {
     std::map<std::string, std::string> paraMap = scope.GetInfo();
-    auto it = paraMap.begin();
-    for (int i = 0; i < paraMap.size(); ++i) {
-        std::string strFirst = (*it++).first;
-        std::string strSecond = (*it++).second;
-        ui.txtScopeInfo->append(QString::fromStdString(strFirst + strSecond));
-        it++;
+    for (const auto& pair : paraMap) {
+        ui.txtScopeInfo->append(QString::fromStdString(pair.first + ": " + pair.second));
     }
 }
 

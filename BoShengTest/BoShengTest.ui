@@ -509,8 +509,8 @@
           <widget class="QTextEdit" name="txtScopeInfo">
            <property name="minimumSize">
             <size>
-             <width>150</width>
-             <height>0</height>
+             <width>300</width>
+             <height>300</height>
             </size>
            </property>
           </widget>
