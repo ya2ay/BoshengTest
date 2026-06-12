@@ -66,3 +66,6 @@ const int UIConstants::UI_POPMSGHIGHT = 80;
 
 const int UIConstants::UI_POPMSGMARGIN_H = 10;
 const int UIConstants::UI_POPMSGMARGIN_V = 10;
+
+//define some color
+

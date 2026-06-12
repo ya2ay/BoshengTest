@@ -686,6 +686,7 @@ void endoControl::UpdateInstStatus(InstData data)
     }
     else if (InstStatus_Master::RIGHTHAND == data.masterType){
         BSInterface.clearImage(5);
+        //BSInterface.drawImage(5, energyStatusName, Rect(1920 - 360 - UIConstants::UI_MARGIN_H, 325, UIConstants::UI_SIDEENERGYWIDTH, UIConstants::UI_SIDEENERGYHIGHT));
         BSInterface.drawRectangle(5, Rect(
             UIConstants::UI_SCREENWIDTH - UIConstants::UI_RECTWIDTH - UIConstants::UI_SIDEENERGYWIDTH - UIConstants::UI_MARGIN_H,
             325, 
@@ -892,11 +893,19 @@ void endoControl::UpdateEnergyStatus(EnergyData data)
 
     if (InstStatus_Master::LEFTHAND == data.masterType) {
         BSInterface.clearImage(4);
-        BSInterface.drawImage(4, energyStatusName, Rect(UIConstants::UI_MARGIN_H, 325, UIConstants::UI_SIDEENERGYWIDTH, UIConstants::UI_SIDEENERGYHIGHT));
+        BSInterface.drawImage(4, energyStatusName, Rect(
+        UIConstants::UI_MARGIN_H, 
+        325, 
+        UIConstants::UI_SIDEENERGYWIDTH, 
+        UIConstants::UI_SIDEENERGYHIGHT));
     }
     else if (InstStatus_Master::RIGHTHAND == data.masterType) {
         BSInterface.clearImage(5);
-        BSInterface.drawImage(5, energyStatusName, Rect(1920 - 360 - UIConstants::UI_MARGIN_H, 325, UIConstants::UI_SIDEENERGYWIDTH, UIConstants::UI_SIDEENERGYHIGHT));
+        BSInterface.drawImage(5, energyStatusName, Rect(
+         UIConstants::UI_SCREENWIDTH - UIConstants::UI_RECTWIDTH - UIConstants::UI_SIDEENERGYWIDTH - UIConstants::UI_MARGIN_H, 
+         325, 
+         UIConstants::UI_SIDEENERGYWIDTH, 
+         UIConstants::UI_SIDEENERGYHIGHT));
     }
 }
 
@@ -964,7 +973,7 @@ void endoControl::UpdateEndoType(EndoTypeData data)
     BSInterface.clearImage(32);
     BSInterface.drawImage(32, typeName, Rect(
         (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYMARGIN_R - UIConstants::UI_ENERGYWIDTH - UIConstants::UI_ENERGYMARGIN_L - UIConstants::UI_ENDOTYPEWIDTH),
-        UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V,
+        UIConstants::UI_MARGIN_V,
         UIConstants::UI_ENDOTYPEWIDTH,
         UIConstants::UI_ENDOTYPEHIGHT));
 }
