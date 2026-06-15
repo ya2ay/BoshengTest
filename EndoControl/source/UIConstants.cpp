@@ -55,8 +55,8 @@ const int UIConstants::UI_MINIICONHIGHT = 60;
 const int UIConstants::UI_MINIICONMARGIN_H = 10;
 const int UIConstants::UI_MINIICONMARGIN_V = 10;
 
-const int UIConstants::UI_MSGWIDTH = 1394;
-const int UIConstants::UI_MSGHIGHT = 80;
+const int UIConstants::UI_MSGRECTHIGHT = 80;
+const int UIConstants::UI_MSGHIGHT = 40;
 
 const int UIConstants::UI_MSGMARGIN_H = 10;
 const int UIConstants::UI_MSGMARGIN_V = 10;

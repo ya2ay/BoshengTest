@@ -59,7 +59,7 @@ public:
     static const int UI_MINIICONMARGIN_H;
     static const int UI_MINIICONMARGIN_V;
 
-    static const int UI_MSGWIDTH;
+    static const int UI_MSGRECTHIGHT;
     static const int UI_MSGHIGHT;
 
     static const int UI_MSGMARGIN_H;

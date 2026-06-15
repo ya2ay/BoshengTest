@@ -149,6 +149,13 @@ struct PopupInfo
 	std::string popContent;
 };
 
+struct IndicatorInfo
+{
+	bool isHide;
+	SlaveNum slaveType;
+	InstPosition pos;
+};
+
 //enum SlaveStatus_GuideTip {
 //	UNKNOWED,
 //	CLUTCH,

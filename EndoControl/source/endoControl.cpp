@@ -17,7 +17,7 @@ endoControl::~endoControl()
 
 bool endoControl::Connect(std::string ipAddress)
 {
-    TCHAR cmdLine[] = L"D:\\EndoScope\\EndoControl\\thirdpart\\qpid-cpp\\bin\\release\\qpidd.exe";
+    TCHAR cmdLine[] = L"qpidd.exe";
 
     // 2. 调用API创建进程
     BOOL bSuccess = CreateProcess(
@@ -265,150 +265,144 @@ void endoControl::onShutdown()
 void endoControl::LoadOSDImages()
 {
     //Blank : 未安装或未分配
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Background_B.png", "Background_B");
+    BSInterface.uploadImage("..\\..\\Images\\Background_B.png", "Background_B");
     //Selected  : 分配给左手或右手，控制
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Background_S.png", "Background_S");
+    BSInterface.uploadImage("..\\..\\Images\\Background_S.png", "Background_S");
     //Unselected : 可切换/暂停/未被控制
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Background_U.png", "Background_U");
+    BSInterface.uploadImage("..\\..\\Images\\Background_U.png", "Background_U");
     //Alert : 异常
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Background_A.png", "Background_A");
+    BSInterface.uploadImage("..\\..\\Images\\Background_A.png", "Background_A");
 
     //None
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm1Num_N.png", "Arm1Num_N");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm2Num_N.png", "Arm2Num_N");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm3Num_N.png", "Arm3Num_N");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm4Num_N.png", "Arm4Num_N");
+    BSInterface.uploadImage("..\\..\\Images\\Arm1Num_N.png", "Arm1Num_N");
+    BSInterface.uploadImage("..\\..\\Images\\Arm2Num_N.png", "Arm2Num_N");
+    BSInterface.uploadImage("..\\..\\Images\\Arm3Num_N.png", "Arm3Num_N");
+    BSInterface.uploadImage("..\\..\\Images\\Arm4Num_N.png", "Arm4Num_N");
 
     //Left hand UNCONTROLLED
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm1Num_LU.png", "Arm1Num_LU");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm2Num_LU.png", "Arm2Num_LU");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm3Num_LU.png", "Arm3Num_LU");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm4Num_LU.png", "Arm4Num_LU");
+    BSInterface.uploadImage("..\\..\\Images\\Arm1Num_LU.png", "Arm1Num_LU");
+    BSInterface.uploadImage("..\\..\\Images\\Arm2Num_LU.png", "Arm2Num_LU");
+    BSInterface.uploadImage("..\\..\\Images\\Arm3Num_LU.png", "Arm3Num_LU");
+    BSInterface.uploadImage("..\\..\\Images\\Arm4Num_LU.png", "Arm4Num_LU");
 
     //Right hand UNCONTROLLED
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm1Num_RU.png", "Arm1Num_RU");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm2Num_RU.png", "Arm2Num_RU");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm3Num_RU.png", "Arm3Num_RU");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm4Num_RU.png", "Arm4Num_RU");
+    BSInterface.uploadImage("..\\..\\Images\\Arm1Num_RU.png", "Arm1Num_RU");
+    BSInterface.uploadImage("..\\..\\Images\\Arm2Num_RU.png", "Arm2Num_RU");
+    BSInterface.uploadImage("..\\..\\Images\\Arm3Num_RU.png", "Arm3Num_RU");
+    BSInterface.uploadImage("..\\..\\Images\\Arm4Num_RU.png", "Arm4Num_RU");
 
     //Left hand Switchable
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm1Num_LS.png", "Arm1Num_LS");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm2Num_LS.png", "Arm2Num_LS");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm3Num_LS.png", "Arm3Num_LS");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm4Num_LS.png", "Arm4Num_LS");
+    BSInterface.uploadImage("..\\..\\Images\\Arm1Num_LS.png", "Arm1Num_LS");
+    BSInterface.uploadImage("..\\..\\Images\\Arm2Num_LS.png", "Arm2Num_LS");
+    BSInterface.uploadImage("..\\..\\Images\\Arm3Num_LS.png", "Arm3Num_LS");
+    BSInterface.uploadImage("..\\..\\Images\\Arm4Num_LS.png", "Arm4Num_LS");
 
     //Right hand Switchable
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm1Num_RS.png", "Arm1Num_RS");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm2Num_RS.png", "Arm2Num_RS");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm3Num_RS.png", "Arm3Num_RS");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm4Num_RS.png", "Arm4Num_RS");
+    BSInterface.uploadImage("..\\..\\Images\\Arm1Num_RS.png", "Arm1Num_RS");
+    BSInterface.uploadImage("..\\..\\Images\\Arm2Num_RS.png", "Arm2Num_RS");
+    BSInterface.uploadImage("..\\..\\Images\\Arm3Num_RS.png", "Arm3Num_RS");
+    BSInterface.uploadImage("..\\..\\Images\\Arm4Num_RS.png", "Arm4Num_RS");
 
     //Left hand Pause
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm1Num_LP.png", "Arm1Num_LP");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm2Num_LP.png", "Arm2Num_LP");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm3Num_LP.png", "Arm3Num_LP");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm4Num_LP.png", "Arm4Num_LP");
+    BSInterface.uploadImage("..\\..\\Images\\Arm1Num_LP.png", "Arm1Num_LP");
+    BSInterface.uploadImage("..\\..\\Images\\Arm2Num_LP.png", "Arm2Num_LP");
+    BSInterface.uploadImage("..\\..\\Images\\Arm3Num_LP.png", "Arm3Num_LP");
+    BSInterface.uploadImage("..\\..\\Images\\Arm4Num_LP.png", "Arm4Num_LP");
 
     //Left hand Controlled
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm1Num_LC.png", "Arm1Num_LC");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm2Num_LC.png", "Arm2Num_LC");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm3Num_LC.png", "Arm3Num_LC");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm4Num_LC.png", "Arm4Num_LC");
+    BSInterface.uploadImage("..\\..\\Images\\Arm1Num_LC.png", "Arm1Num_LC");
+    BSInterface.uploadImage("..\\..\\Images\\Arm2Num_LC.png", "Arm2Num_LC");
+    BSInterface.uploadImage("..\\..\\Images\\Arm3Num_LC.png", "Arm3Num_LC");
+    BSInterface.uploadImage("..\\..\\Images\\Arm4Num_LC.png", "Arm4Num_LC");
 
     //Left hand BREAKDOWN
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm1Num_LB.png", "Arm1Num_LB");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm2Num_LB.png", "Arm2Num_LB");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm3Num_LB.png", "Arm3Num_LB");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm4Num_LB.png", "Arm4Num_LB");
+    BSInterface.uploadImage("..\\..\\Images\\Arm1Num_LB.png", "Arm1Num_LB");
+    BSInterface.uploadImage("..\\..\\Images\\Arm2Num_LB.png", "Arm2Num_LB");
+    BSInterface.uploadImage("..\\..\\Images\\Arm3Num_LB.png", "Arm3Num_LB");
+    BSInterface.uploadImage("..\\..\\Images\\Arm4Num_LB.png", "Arm4Num_LB");
 
     //Right hand Pause
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm1Num_RP.png", "Arm1Num_RP");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm2Num_RP.png", "Arm2Num_RP");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm3Num_RP.png", "Arm3Num_RP");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm4Num_RP.png", "Arm4Num_RP");
+    BSInterface.uploadImage("..\\..\\Images\\Arm1Num_RP.png", "Arm1Num_RP");
+    BSInterface.uploadImage("..\\..\\Images\\Arm2Num_RP.png", "Arm2Num_RP");
+    BSInterface.uploadImage("..\\..\\Images\\Arm3Num_RP.png", "Arm3Num_RP");
+    BSInterface.uploadImage("..\\..\\Images\\Arm4Num_RP.png", "Arm4Num_RP");
 
     //Right hand Controlled
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm1Num_RC.png", "Arm1Num_RC");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm2Num_RC.png", "Arm2Num_RC");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm3Num_RC.png", "Arm3Num_RC");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm4Num_RC.png", "Arm4Num_RC");
+    BSInterface.uploadImage("..\\..\\Images\\Arm1Num_RC.png", "Arm1Num_RC");
+    BSInterface.uploadImage("..\\..\\Images\\Arm2Num_RC.png", "Arm2Num_RC");
+    BSInterface.uploadImage("..\\..\\Images\\Arm3Num_RC.png", "Arm3Num_RC");
+    BSInterface.uploadImage("..\\..\\Images\\Arm4Num_RC.png", "Arm4Num_RC");
 
     //Right hand BREAKDOWN
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm1Num_RB.png", "Arm1Num_RB");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm2Num_RB.png", "Arm2Num_RB");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm3Num_RB.png", "Arm3Num_RB");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Arm4Num_RB.png", "Arm4Num_RB");
+    BSInterface.uploadImage("..\\..\\Images\\Arm1Num_RB.png", "Arm1Num_RB");
+    BSInterface.uploadImage("..\\..\\Images\\Arm2Num_RB.png", "Arm2Num_RB");
+    BSInterface.uploadImage("..\\..\\Images\\Arm3Num_RB.png", "Arm3Num_RB");
+    BSInterface.uploadImage("..\\..\\Images\\Arm4Num_RB.png", "Arm4Num_RB");
+
+    //None
+    BSInterface.uploadImage("..\\..\\Images\\Arm1Num_N.png", "Arm1Num_N");
+    BSInterface.uploadImage("..\\..\\Images\\Arm2Num_N.png", "Arm2Num_N");
+    BSInterface.uploadImage("..\\..\\Images\\Arm3Num_N.png", "Arm3Num_N");
+    BSInterface.uploadImage("..\\..\\Images\\Arm4Num_N.png", "Arm4Num_N");
 
     //Energy
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Energy_Cut.png", "Energy_Cut");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Energy_Coag.png", "Energy_Coag");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Energy_Biopolar.png", 
-        "Energy_Biopolar");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Energy_Empty.png", "Energy_Empty");
+    BSInterface.uploadImage("..\\..\\Images\\Energy_Cut.png", "Energy_Cut");
+    BSInterface.uploadImage("..\\..\\Images\\Energy_Coag.png", "Energy_Coag");
+    BSInterface.uploadImage("..\\..\\Images\\Energy_Biopolar.png", "Energy_Biopolar");
+    BSInterface.uploadImage("..\\..\\Images\\Energy_Empty.png", "Energy_Empty");
 
     //Endo
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Endo_0.png", "Endo_0");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Endo_30Up.png", "Endo_30Up");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Endo_30Down.png", "Endo_30Down");
-    //BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Endo_Empty.png", "Energy_Empty");
+    BSInterface.uploadImage("..\\..\\Images\\Endo_0.png", "Endo_0");
+    BSInterface.uploadImage("..\\..\\Images\\Endo_30Up.png", "Endo_30Up");
+    BSInterface.uploadImage("..\\..\\Images\\Endo_30Down.png", "Endo_30Down");
+    //BSInterface.uploadImage("..\\..\\Images\\Endo_Empty.png", "Energy_Empty");
 
     //Side Energy
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Energy_ActiveF.png", 
-        "Energy_ActiveF");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Energy_Deactive.png", 
-        "Energy_Deactive");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Energy_ActiveS.png", 
-        "Energy_ActiveS");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Energy_Hover.png", 
-        "Energy_Hover");
+    BSInterface.uploadImage("..\\..\\Images\\Energy_ActiveF.png", "Energy_ActiveF");
+    BSInterface.uploadImage("..\\..\\Images\\Energy_Deactive.png", "Energy_Deactive");
+    BSInterface.uploadImage("..\\..\\Images\\Energy_ActiveS.png", "Energy_ActiveS");
+    BSInterface.uploadImage("..\\..\\Images\\Energy_Hover.png", "Energy_Hover");
 
     //Top Message
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Message_Back.png", "Message_Back");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Message_Show.png", "Message_Show");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Message_Hide.png", "Message_Hide");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Message_Info.png", "Message_Info");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Message_Prompt.png",
-        "Message_Prompt");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Message_Warning.png", 
-        "Message_Warning");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Message_Fault.png", 
-        "Message_Fault");
+    BSInterface.uploadImage("..\\..\\Images\\Message_Back.png", "Message_Back");
+    BSInterface.uploadImage("..\\..\\Images\\Message_Show.png", "Message_Show");
+    BSInterface.uploadImage("..\\..\\Images\\Message_Hide.png", "Message_Hide");
+    BSInterface.uploadImage("..\\..\\Images\\Message_Info.png", "Message_Info");
+    BSInterface.uploadImage("..\\..\\Images\\Message_Prompt.png","Message_Prompt");
+    BSInterface.uploadImage("..\\..\\Images\\Message_Warning.png", "Message_Warning");
+    BSInterface.uploadImage("..\\..\\Images\\Message_Fault.png", "Message_Fault");
 
     //Popup Message
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_BgInfo.png",    "Popup_BgInfo");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_BgPrompt.png",  "Popup_BgPrompt");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_BgWarning.png", "Popup_BgWarning");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_BgFault.png",   "Popup_BgFault");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_BgInfo.png",    "Popup_BgInfo");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_BgPrompt.png",  "Popup_BgPrompt");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_BgWarning.png", "Popup_BgWarning");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_BgFault.png",   "Popup_BgFault");
 
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_InstInfo.png",    "Popup_InstInfo");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_InstPrompt.png",  "Popup_InstPrompt");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_InstWarning.png", "Popup_InstWarning");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_InstFault.png",   "Popup_InstFault");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_InstInfo.png",    "Popup_InstInfo");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_InstPrompt.png",  "Popup_InstPrompt");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_InstWarning.png", "Popup_InstWarning");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_InstFault.png",   "Popup_InstFault");
 
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_SlaveInfo.png",    "Popup_SlaveInfo");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_SlavePrompt.png",  "Popup_SlavePrompt");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_SlaveWarning.png", "Popup_SlaveWarning");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_SlaveFault.png",   "Popup_SlaveFault");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_SlaveInfo.png",    "Popup_SlaveInfo");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_SlavePrompt.png",  "Popup_SlavePrompt");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_SlaveWarning.png", "Popup_SlaveWarning");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_SlaveFault.png",   "Popup_SlaveFault");
     
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_MasterInfo.png",    "Popup_MasterInfo");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_MasterPrompt.png",  "Popup_MasterPrompt");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_MasterWarning.png", "Popup_MasterWarning");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_MasterFault.png",   "Popup_MasterFault");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_MasterInfo.png",    "Popup_MasterInfo");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_MasterPrompt.png",  "Popup_MasterPrompt");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_MasterWarning.png", "Popup_MasterWarning");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_MasterFault.png",   "Popup_MasterFault");
 
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_CannulaInfo.png",    "Popup_CannulaInfo");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_CannulaPrompt.png",  "Popup_CannulaPrompt");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_CannulaWarning.png", "Popup_CannulaWarning");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Popup_CannulaFault.png",   "Popup_CannulaFault");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_CannulaInfo.png",    "Popup_CannulaInfo");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_CannulaPrompt.png",  "Popup_CannulaPrompt");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_CannulaWarning.png", "Popup_CannulaWarning");
+    BSInterface.uploadImage("..\\..\\Images\\Popup_CannulaFault.png",   "Popup_CannulaFault");
 
     //Blank 
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Inst1Indicator.png", 
-        "InstIndicator1");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Inst2Indicator.png", 
-        "InstIndicator2");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Inst3Indicator.png", 
-        "InstIndicator3");
-    BSInterface.uploadImage("D:\\EndoScope\\BoshengTest\\BoShengTest\\Images\\Inst4Indicator.png", 
-        "InstIndicator4");
+    BSInterface.uploadImage("..\\..\\Images\\InstIndicator1.png", "InstIndicator1");
+    BSInterface.uploadImage("..\\..\\Images\\InstIndicator2.png", "InstIndicator2");
+    BSInterface.uploadImage("..\\..\\Images\\InstIndicator3.png", "InstIndicator3");
+    BSInterface.uploadImage("..\\..\\Images\\InstIndicator4.png", "InstIndicator4");
 
     BSInterface.drawRectangle(100, Rect(1560, 0, 360, 1080),120, 100, 100, 0.8);
 }
@@ -553,11 +547,23 @@ void endoControl::UpdateMsg(CustomErrorInfo info)
             UIConstants::UI_ICONWIDTH, 
             UIConstants::UI_ICONHIGHT), 100, 40, 40, 0.5);
 
+        //BSInterface.drawImage(1, msgShowHide, Rect(
+        //    UIConstants::UI_MARGIN_H,
+        //    1080 - UIConstants::UI_MARGIN_V - UIConstants::UI_ICONHIGHT,
+        //    UIConstants::UI_ICONWIDTH,
+        //    UIConstants::UI_ICONHIGHT));
+
         BSInterface.drawRectangle(3, Rect(
             UIConstants::UI_MARGIN_H + UIConstants::UI_ICONWIDTH,
             UIConstants::UI_SCREENHIGHT - UIConstants::UI_MARGIN_V - UIConstants::UI_ICONHIGHT,
             UIConstants::UI_SCREENWIDTH - UIConstants::UI_RECTWIDTH - (UIConstants::UI_MARGIN_H * 2 + UIConstants::UI_ICONWIDTH),
-            UIConstants::UI_MSGHIGHT), 80, 50, 50, 0.5);
+            UIConstants::UI_MSGRECTHIGHT), 80, 50, 50, 0.5);
+
+        //BSInterface.drawImage(3, "Message_Back", Rect(
+        //    UIConstants::UI_MARGIN_H + UIConstants::UI_ICONWIDTH,
+        //    UIConstants::UI_SCREENHIGHT - UIConstants::UI_MARGIN_V - UIConstants::UI_ICONHIGHT,
+        //    UIConstants::UI_SCREENWIDTH - UIConstants::UI_RECTWIDTH - (UIConstants::UI_MARGIN_H * 2 + UIConstants::UI_ICONWIDTH),
+        //    UIConstants::UI_MSGRECTHIGHT));
 
         BSInterface.drawRectangle(2, Rect(
             UIConstants::UI_MARGIN_H + UIConstants::UI_ICONWIDTH + UIConstants::UI_MINIICONMARGIN_H,
@@ -565,21 +571,9 @@ void endoControl::UpdateMsg(CustomErrorInfo info)
             UIConstants::UI_MINIICONWIDTH,
             UIConstants::UI_MINIICONHIGHT), 80, 40, 40, 0.5);
 
-        //BSInterface.drawImage(1, msgShowHide, Rect(
-        //    UIConstants::UI_MARGIN_H,
-        //    1080 - UIConstants::UI_MARGIN_V - UIConstants::UI_ICONHIGHT,
-        //    UIConstants::UI_ICONWIDTH,
-        //    UIConstants::UI_ICONHIGHT));
-
-        //BSInterface.drawImage(3, "Message_Back", Rect(
-        //    UIConstants::UI_MARGIN_H + UIConstants::UI_ICONWIDTH,
-        //    UIConstants::UI_SCREENHIGHT - UIConstants::UI_MARGIN_V - UIConstants::UI_ICONHIGHT,
-        //    UIConstants::UI_SCREENWIDTH - UIConstants::UI_RECTWIDTH - (UIConstants::UI_MARGIN_H * 2 + UIConstants::UI_ICONWIDTH),
-        //    UIConstants::UI_MSGHIGHT));
-
         //BSInterface.drawImage(2, msgLevel, Rect(
         //    UIConstants::UI_MARGIN_H + UIConstants::UI_ICONWIDTH + UIConstants::UI_MINIICONMARGIN_H,
-        //    1080 - UIConstants::UI_MARGIN_V - UIConstants::UI_MINIICONMARGIN_V - UIConstants::UI_MINIICONHIGHT,
+        //    UIConstants::UI_SCREENHIGHT - UIConstants::UI_MARGIN_V - UIConstants::UI_MINIICONMARGIN_V - UIConstants::UI_MINIICONHIGHT,
         //    UIConstants::UI_MINIICONWIDTH,
         //    UIConstants::UI_MINIICONHIGHT));
 
@@ -587,7 +581,7 @@ void endoControl::UpdateMsg(CustomErrorInfo info)
             UIConstants::UI_MARGIN_H + UIConstants::UI_ICONWIDTH + UIConstants::UI_MINIICONMARGIN_H * 2 + UIConstants::UI_MINIICONWIDTH,
             UIConstants::UI_SCREENHIGHT - UIConstants::UI_MARGIN_V - UIConstants::UI_MINIICONMARGIN_V - UIConstants::UI_MINIICONHIGHT,
             UIConstants::UI_SCREENWIDTH - UIConstants::UI_RECTWIDTH - (UIConstants::UI_MARGIN_H * 2 + UIConstants::UI_ICONWIDTH + UIConstants::UI_MINIICONMARGIN_H * 2 + UIConstants::UI_MINIICONWIDTH),
-            UIConstants::UI_MSGHIGHT - 40), 0.5);
+            UIConstants::UI_MSGHIGHT), 0.7);
     }
 }
 
@@ -631,11 +625,23 @@ void endoControl::UpdateInstStatus(InstData data)
     //        UIConstants::UI_TABWIDTH,
     //        UIConstants::UI_TABHIGHT ));
 
+    BSInterface.drawRectangle(15 + (rate - 1) * 4,
+        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
+            UIConstants::UI_MARGIN_V,
+            UIConstants::UI_TABWIDTH,
+            UIConstants::UI_TABHIGHT), 40, 80, 40, 0.8);
+
     //BSInterface.drawImage(14 + (rate - 1) * 4, numName,
     //    Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
     //        UIConstants::UI_MARGIN_V,
     //        UIConstants::UI_NUMWIDTH,
     //        UIConstants::UI_NUMHIGHT));
+
+    BSInterface.drawRectangle(14 + (rate - 1) * 4,
+        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
+            UIConstants::UI_MARGIN_V,
+            UIConstants::UI_NUMWIDTH,
+            UIConstants::UI_NUMHIGHT), 80, 80, 40, 0.8);
 
     //BSInterface.drawImage(16 + (rate - 1) * 4, cutName,
     //    Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYWIDTH - UIConstants::UI_ENERGYMARGIN_R),
@@ -643,29 +649,17 @@ void endoControl::UpdateInstStatus(InstData data)
     //        UIConstants::UI_ENERGYWIDTH,
     //        UIConstants::UI_ENERGYHIGHT));
 
+    BSInterface.drawRectangle(16 + (rate - 1) * 4,
+        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYWIDTH - UIConstants::UI_ENERGYMARGIN_R),
+            UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V + UIConstants::UI_ENERGYHIGHT + UIConstants::UI_ENERGYSPACING_V,
+            UIConstants::UI_ENERGYWIDTH,
+            UIConstants::UI_ENERGYHIGHT), 40, 80, 80, 0.8);
+
     //BSInterface.drawImage(17 + (rate - 1) * 4, coagName,
     //    Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYWIDTH - UIConstants::UI_ENERGYMARGIN_R),
     //        UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V,
     //        UIConstants::UI_ENERGYWIDTH,
     //        UIConstants::UI_ENERGYHIGHT));
-
-    BSInterface.drawRectangle(15 + (rate - 1) * 4, 
-        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
-            UIConstants::UI_MARGIN_V,
-            UIConstants::UI_TABWIDTH,
-            UIConstants::UI_TABHIGHT), 40, 80, 40, 0.8);
-
-    BSInterface.drawRectangle(14 + (rate - 1) * 4, 
-        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
-            UIConstants::UI_MARGIN_V,
-            UIConstants::UI_NUMWIDTH,
-            UIConstants::UI_NUMHIGHT), 80, 80, 40, 0.8);
-
-    BSInterface.drawRectangle(16 + (rate - 1) * 4, 
-        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYWIDTH - UIConstants::UI_ENERGYMARGIN_R),
-            UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V + UIConstants::UI_ENERGYHIGHT + UIConstants::UI_ENERGYSPACING_V,
-            UIConstants::UI_ENERGYWIDTH,
-            UIConstants::UI_ENERGYHIGHT), 40, 80, 80, 0.8);
 
     BSInterface.drawRectangle(17 + (rate - 1) * 4, 
         Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYWIDTH - UIConstants::UI_ENERGYMARGIN_R),
@@ -677,7 +671,12 @@ void endoControl::UpdateInstStatus(InstData data)
 
     if (InstStatus_Master::LEFTHAND == data.masterType) {
         BSInterface.clearImage(4);
-        /*BSInterface.drawImage(4, energyStatusName, Rect(UIConstants::UI_MARGIN_H, 325, UIConstants::UI_SIDEENERGYWIDTH, UIConstants::UI_SIDEENERGYHIGHT));*/
+        /*BSInterface.drawImage(4, energyStatusName, Rect(
+        UIConstants::UI_MARGIN_H, 
+        325, 
+        UIConstants::UI_SIDEENERGYWIDTH, 
+        UIConstants::UI_SIDEENERGYHIGHT));*/
+
         BSInterface.drawRectangle(4, Rect(
             UIConstants::UI_MARGIN_H, 
             325, 
@@ -686,7 +685,12 @@ void endoControl::UpdateInstStatus(InstData data)
     }
     else if (InstStatus_Master::RIGHTHAND == data.masterType){
         BSInterface.clearImage(5);
-        //BSInterface.drawImage(5, energyStatusName, Rect(1920 - 360 - UIConstants::UI_MARGIN_H, 325, UIConstants::UI_SIDEENERGYWIDTH, UIConstants::UI_SIDEENERGYHIGHT));
+        //BSInterface.drawImage(5, energyStatusName, Rect(
+        // UIConstants::UI_SCREENWIDTH - UIConstants::UI_RECTWIDTH - UIConstants::UI_SIDEENERGYWIDTH - UIConstants::UI_MARGIN_H,
+        // 325, 
+        // UIConstants::UI_SIDEENERGYWIDTH, 
+        // UIConstants::UI_SIDEENERGYHIGHT));
+
         BSInterface.drawRectangle(5, Rect(
             UIConstants::UI_SCREENWIDTH - UIConstants::UI_RECTWIDTH - UIConstants::UI_SIDEENERGYWIDTH - UIConstants::UI_MARGIN_H,
             325, 
@@ -698,7 +702,7 @@ void endoControl::UpdateInstStatus(InstData data)
         Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + UIConstants::UI_NUMWIDTH + UIConstants::UI_TEXTSPACING_L, 
             UIConstants::UI_MARGIN_V + UIConstants::UI_TEXTMARGIN_B + UIConstants::UI_TEXTHIGHT + UIConstants::UI_TEXTSPACING_V,
             UIConstants::UI_TEXTWIDTH,
-            UIConstants::UI_TEXTHIGHT), 0.4);
+            UIConstants::UI_TEXTHIGHT), 0.3);
 }
 
 void endoControl::UpdateEndoStatus(EndoData data)
@@ -752,29 +756,29 @@ void endoControl::UpdateEndoStatus(EndoData data)
     //    UIConstants::UI_TABWIDTH, 
     //    UIConstants::UI_TABHIGHT ));
 
+    BSInterface.drawRectangle(15 + (rate - 1) * 4, Rect(
+        (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
+        UIConstants::UI_MARGIN_V,
+        UIConstants::UI_TABWIDTH,
+        UIConstants::UI_TABHIGHT), 22, 44, 66, 0.3);
+
     //BSInterface.drawImage(14 + (rate - 1) * 4, numName,Rect(
     //    (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H, 
     //    UIConstants::UI_MARGIN_V, 
     //    UIConstants::UI_NUMWIDTH, 
     //    UIConstants::UI_NUMHIGHT));
 
-    //BSInterface.drawImage(32, typeName, Rect(
-    //    (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYMARGIN_R - UIConstants::UI_ENERGYWIDTH - UIConstants::UI_ENERGYMARGIN_L - UIConstants::UI_ENDOTYPEWIDTH),
-    //    UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V,
-    //    UIConstants::UI_ENDOTYPEWIDTH,
-    //    UIConstants::UI_ENDOTYPEHIGHT));
-
-    BSInterface.drawRectangle(15 + (rate - 1) * 4, Rect(
-        (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
-        UIConstants::UI_MARGIN_V,
-        UIConstants::UI_TABWIDTH,
-        UIConstants::UI_TABHIGHT),22, 44, 66, 0.3);
-
     BSInterface.drawRectangle(14 + (rate - 1) * 4, Rect(
         (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
         UIConstants::UI_MARGIN_V,
         UIConstants::UI_NUMWIDTH,
         UIConstants::UI_NUMHIGHT), 66, 22, 44, 0.3);
+
+    //BSInterface.drawImage(32, typeName, Rect(
+    //    (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYMARGIN_R - UIConstants::UI_ENERGYWIDTH - UIConstants::UI_ENERGYMARGIN_L - UIConstants::UI_ENDOTYPEWIDTH),
+    //    UIConstants::UI_MARGIN_V
+    //    UIConstants::UI_ENDOTYPEWIDTH,
+    //    UIConstants::UI_ENDOTYPEHIGHT));
 
     BSInterface.drawRectangle(32, Rect(
         (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYMARGIN_R - UIConstants::UI_ENERGYWIDTH - UIConstants::UI_ENERGYMARGIN_L - UIConstants::UI_ENDOTYPEWIDTH),
@@ -786,13 +790,13 @@ void endoControl::UpdateEndoStatus(EndoData data)
         (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYMARGIN_R - UIConstants::UI_ENERGYWIDTH),
         UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V + UIConstants::UI_ENERGYHIGHT + UIConstants::UI_ENERGYSPACING_V, 
         UIConstants::UI_ENERGYWIDTH, 
-        UIConstants::UI_ENERGYHIGHT),0.2);
+        UIConstants::UI_ENERGYHIGHT),0.3);
     
     BSInterface.drawText(15, zoomName, Rect(
         (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYMARGIN_R - UIConstants::UI_ENERGYWIDTH),
         UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V, 
         UIConstants::UI_ENERGYWIDTH, 
-        UIConstants::UI_ENERGYHIGHT), 0.2);
+        UIConstants::UI_ENERGYHIGHT), 0.3);
 }
 
 void endoControl::UpdatePopMsg(PopupInfo info)
@@ -861,29 +865,29 @@ void endoControl::UpdatePopMsg(PopupInfo info)
     //        UIConstants::UI_POPWIDTH,
     //        UIConstants::UI_POPHIGHT));
 
+    BSInterface.drawRectangle(6 + (rate - 1) * 2, Rect(
+        (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
+        UIConstants::UI_MARGIN_V + UIConstants::UI_TABHIGHT + UIConstants::UI_TABPOPSPACING,
+        UIConstants::UI_POPWIDTH,
+        UIConstants::UI_POPHIGHT), 22, 44, 166, 0.3);
+
     //BSInterface.drawImage(7 + (rate - 1) * 2, iconName,
     //    Rect(rate * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H - UIConstants::UI_TABSPACING - UIConstants::UI_ICONMARGIN_H - UIConstants::UI_ICONWIDTH,
     //        UIConstants::UI_MARGIN_V + UIConstants::UI_TABHIGHT  + UIConstants::UI_TABPOPSPACING + UIConstants::UI_ICONMARGIN_V,
     //        UIConstants::UI_ICONWIDTH,
     //        UIConstants::UI_ICONHIGHT));
 
-    BSInterface.drawRectangle(6 + (rate - 1) * 2, 
-        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
-            UIConstants::UI_MARGIN_V + UIConstants::UI_TABHIGHT + UIConstants::UI_TABPOPSPACING,
-            UIConstants::UI_POPWIDTH,
-            UIConstants::UI_POPHIGHT), 22, 44, 166, 0.3);
+    BSInterface.drawRectangle(7 + (rate - 1) * 2, Rect(
+        rate * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H - UIConstants::UI_TABSPACING - UIConstants::UI_ICONMARGIN_H - UIConstants::UI_ICONWIDTH,
+        UIConstants::UI_MARGIN_V + UIConstants::UI_TABHIGHT + UIConstants::UI_TABPOPSPACING + UIConstants::UI_ICONMARGIN_V,
+        UIConstants::UI_ICONWIDTH,
+        UIConstants::UI_ICONHIGHT), 22, 144, 66, 0.3);
 
-    BSInterface.drawRectangle(7 + (rate - 1) * 2, 
-        Rect(rate * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H - UIConstants::UI_TABSPACING - UIConstants::UI_ICONMARGIN_H - UIConstants::UI_ICONWIDTH,
-            UIConstants::UI_MARGIN_V + UIConstants::UI_TABHIGHT + UIConstants::UI_TABPOPSPACING + UIConstants::UI_ICONMARGIN_V,
-            UIConstants::UI_ICONWIDTH,
-            UIConstants::UI_ICONHIGHT), 22, 144, 66, 0.3);
-
-    BSInterface.drawText(2 + (rate - 1) * 1, info.popContent,
-        Rect((rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + 16,
-            UIConstants::UI_MARGIN_V + UIConstants::UI_TABHIGHT  + UIConstants::UI_TABPOPSPACING + UIConstants::UI_ICONMARGIN_V,
-            270,
-            UIConstants::UI_ICONHIGHT), 0.5);
+    BSInterface.drawText(2 + (rate - 1) * 1, info.popContent,Rect(
+        (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + UIConstants::UI_POPMSGMARGIN_H,
+        UIConstants::UI_MARGIN_V + UIConstants::UI_TABHIGHT  + UIConstants::UI_TABPOPSPACING + UIConstants::UI_ICONMARGIN_V,
+        UIConstants::UI_TABWIDTH - UIConstants::UI_ICONWIDTH - UIConstants::UI_ICONMARGIN_H * 2 - UIConstants::UI_POPMSGMARGIN_H * 2,
+        UIConstants::UI_POPMSGHIGHT), 0.5);
 }
 
 //Single Status Update
@@ -938,7 +942,7 @@ void endoControl::UpdateEndoZoom(ZoomData data)
         (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYMARGIN_R - UIConstants::UI_ENERGYWIDTH),
         UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V,
         UIConstants::UI_ENERGYWIDTH,
-        UIConstants::UI_ENERGYHIGHT), 0.2);
+        UIConstants::UI_ENERGYHIGHT), 0.3);
 }
 
 void endoControl::UpdateEndoFluro(FluroData data)
@@ -953,7 +957,7 @@ void endoControl::UpdateEndoFluro(FluroData data)
         (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H + (UIConstants::UI_TABWIDTH - UIConstants::UI_ENERGYMARGIN_R - UIConstants::UI_ENERGYWIDTH),
         UIConstants::UI_MARGIN_V + UIConstants::UI_ENERGYMARGIN_V + UIConstants::UI_ENERGYHIGHT + UIConstants::UI_ENERGYSPACING_V,
         UIConstants::UI_ENERGYWIDTH,
-        UIConstants::UI_ENERGYHIGHT), 0.2);
+        UIConstants::UI_ENERGYHIGHT), 0.3);
 }
 
 void endoControl::UpdateEndoType(EndoTypeData data)
@@ -978,6 +982,22 @@ void endoControl::UpdateEndoType(EndoTypeData data)
         UIConstants::UI_ENDOTYPEHIGHT));
 }
 
+void endoControl::UpdateIndicatorStatus(IndicatorInfo data)
+{
+    int index = data.slaveType;
+    BSInterface.clearImage(32 + index);
+    if (data.isHide)
+    {
+        return;
+    }
+
+    std::string indicatorName = "InstIndicator" + std::to_string(index);
+    //BSInterface.drawImage(32 + index, indicatorName, Rect(
+    //    (rate - 1) * (UIConstants::UI_TABWIDTH + UIConstants::UI_TABSPACING) + UIConstants::UI_MARGIN_H,
+    //    UIConstants::UI_MARGIN_V,
+    //    UIConstants::UI_NUMWIDTH,
+    //    UIConstants::UI_NUMHIGHT));
+}
 void endoControl::ClearAllContent()
 {
     BSInterface.clearImage(1);

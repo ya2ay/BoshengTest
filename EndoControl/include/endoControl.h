@@ -60,6 +60,8 @@ public:
     void UpdateEndoFluro(FluroData data);
     void UpdateEndoType(EndoTypeData data);
 
+    void UpdateIndicatorStatus(IndicatorInfo data);
+
     void ClearAllContent();
 
 private:
